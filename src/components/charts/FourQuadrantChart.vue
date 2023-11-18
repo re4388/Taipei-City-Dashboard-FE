@@ -109,9 +109,11 @@ const chartOptions = ref({
 		offsetY: 4,
 		style: {
 			fontSize: "10px",
+			colors: ["#1f1d1d"],
 		},
+		background: {},
 	},
-	color: props.chart_config.colors,
+	colors: ["#1f1d1d"],
 	legend: {
 		show: false,
 	},
@@ -119,7 +121,7 @@ const chartOptions = ref({
 		show: false,
 	},
 	markers: {
-		colors: props.chart_config.colors,
+		colors: ["#1f1d1d"],
 		hover: {
 			size: 8,
 		},
@@ -213,11 +215,11 @@ const drawBg = () => {
 
 		div.setAttribute(
 			"style",
-			`position: absolute; 
-			width: 50%; 
-			height: 50%; 
-			top: ${DEFAULT_BACKGROUND_CONFIG[i].top}; 
-			left: ${DEFAULT_BACKGROUND_CONFIG[i].left}; 
+			`position: absolute;
+			width: 50%;
+			height: 50%;
+			top: ${DEFAULT_BACKGROUND_CONFIG[i].top};
+			left: ${DEFAULT_BACKGROUND_CONFIG[i].left};
 			border: 2px solid ${hexToRgba(color, transparency)};
 			box-sizing: border-box; background: ${hexToRgba(color, transparency)}`
 		);

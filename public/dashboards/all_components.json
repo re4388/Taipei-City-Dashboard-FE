@@ -4083,7 +4083,7 @@
 			"index": "child_count",
 			"map_config": null,
 			"chart_config": {
-				"color": ["#14660E"],
+				"color": ["#58B836"],
 				"types": ["DistrictChart", "RadarChart", "ColumnChart"],
 				"unit": "人"
 			},
@@ -4106,7 +4106,7 @@
 			"index": "child_count",
 			"map_config": null,
 			"chart_config": {
-				"color": ["#14660E"],
+				"color": ["#58B836"],
 				"types": ["ColumnChart", "DistrictChart", "RadarChart"],
 				"unit": "個"
 			},
@@ -4128,32 +4128,25 @@
 			"id": 303,
 			"index": "child_care_center",
 			"chart_config": {
-				"color": [
-					"#14660E",
-					"#247C17",
-					"#3C9A25",
-					"#58B836",
-					"#78D64B",
-					"#A1E676",
-					"#BFF294",
-					"#DBFAB9",
-					"#EFFCDC"
-				],
 				"types": ["FourQuadrantChart"],
-				"xaxisUnit": "0-6歲人口數",
-				"yaxisUnit": "安全指數",
+				"xaxisLabel": "幼年人口",
+				"yaxisLabel": "車禍數",
+				"xaxisUnit": "人",
+				"yaxisUnit": "次",
 				"backgrounds": [
 					{
-						"name": "Happy"
+						"name": "安全未來",
+						"color": "#436ce8"
 					},
 					{
-						"name": "Happy 2"
+						"name": "安心家園"
 					},
 					{
-						"name": "Not Happy"
+						"name": "安全警醒"
 					},
 					{
-						"name": "Not Happy 2"
+						"name": "安全革命",
+						"color": "#f75d52"
 					}
 				]
 			},
@@ -4176,7 +4169,7 @@
 			"index": "traffic_accident_2",
 			"map_config": null,
 			"chart_config": {
-				"color": ["#14660E"],
+				"color": ["#58B836"],
 				"types": ["RadarChart", "DistrictChart", "ColumnChart"],
 				"unit": "個"
 			},
@@ -4222,17 +4215,6 @@
 			"id": 306,
 			"index": "safe_distance",
 			"chart_config": {
-				"color": [
-					"#14660E",
-					"#247C17",
-					"#3C9A25",
-					"#58B836",
-					"#78D64B",
-					"#A1E676",
-					"#BFF294",
-					"#DBFAB9",
-					"#EFFCDC"
-				],
 				"types": ["FourQuadrantChart"],
 				"xaxisLabel": "車位數",
 				"yaxisLabel": "捷運站距離",
@@ -4249,7 +4231,7 @@
 						"name": "交通不便"
 					},
 					{
-						"name": "最好開車"
+						"name": "建議開車"
 					}
 				]
 			},
