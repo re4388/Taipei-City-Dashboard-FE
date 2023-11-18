@@ -4433,7 +4433,7 @@
 				{
 					"index": "_nearByParkPoint",
 					"paint": {
-						"circle-stroke-color": "red",
+						"circle-stroke-color": "blue",
 						"circle-opacity": 0,
 						"circle-stroke-width": 1.5
 					},
@@ -4468,7 +4468,7 @@
 				{
 					"index": "_parentToMRTLine",
 					"paint": {
-						"line-color": "blue"
+						"line-color": "white"
 					},
 					"property": [
 						{
@@ -4477,16 +4477,10 @@
 						}
 					],
 					"type": "line",
-					"icon": "dash",
 					"title": "親子館共融中心到MRT"
 				},
 				{
 					"index": "_parentPoint",
-					"paint": {
-						"circle-opacity": 0,
-						"circle-stroke-color": "#8bc34a",
-						"circle-stroke-width": 1.5
-					},
 					"property": [
 						{
 							"key": "name",
@@ -4501,7 +4495,8 @@
 							"name": "電話"
 						}
 					],
-					"type": "circle",
+					"type": "symbol",
+					"icon": "parent_0",
 					"title": "親子館"
 				}
 			],
@@ -4537,62 +4532,57 @@
 		"1004": {
 			"name": "意外風險區域",
 			"id": 1004,
-			"index": "youbike_grid",
+			"index": "timDanger",
 			"chart_config": {
 				"types": ["TreemapChart", "BarChart"],
 				"unit": "個網格",
 				"color": [
-					"#7FBF7B",
-					"#8E8E8E",
-					"#40A461",
-					"#BEBEBE",
-					"#3D56FF",
-					"#BFDAB8",
-					"#ACCFFF"
+					"#ffba08",
+					"#faa307",
+					"#f48c06",
+					"#e85d04",
+					"#dc2f02",
+					"#d00000",
+					"#9d0208"
 				],
 				"map_filter": [
-					"class",
+					"danger",
 					[
-						"無法設站-山區且土地限制",
-						"已設站",
-						"無法設站-山區",
-						"鄰近已設站",
-						"未設站",
-						"無法設站-土地限制",
-						"無法設站-特殊條件限制"
+						0,
+						1,
+						2,
+						3,
+						4,
+						5
 					]
 				]
 			},
 			"map_config": [
 				{
-					"index": "youbike_grid",
+					"index": "_timDanger",
 					"paint": {
 						"fill-color": [
 							"case",
-							["==", ["get", "class"], "無法設站-山區"],
-							"#40A461",
-							["==", ["get", "class"], "無法設站-山區且土地限制"],
-							"#7FBF7B",
-							["==", ["get", "class"], "無法設站-特殊條件限制"],
-							"#ACCFFF",
-							["==", ["get", "class"], "鄰近已設站"],
-							"#BEBEBE",
-							["==", ["get", "class"], "無法設站-土地限制"],
-							"#BFDAB8",
-							["==", ["get", "class"], "未設站"],
-							"#3D56FF",
-							"#8E8E8E"
+							["==", ["get", "danger"], 2],
+							"#f48c06",
+							["==", ["get", "danger"], 3],
+							"#e85d04",
+							["==", ["get", "danger"], 4],
+							"#dc2f02",
+							["==", ["get", "danger"], 5],
+							"#d00000",
+							"#0F0F0F"
 						],
 						"fill-opacity": 0.5,
 						"fill-outline-color": "#555555"
 					},
 					"property": [
 						{
-							"key": "class",
-							"name": "類型"
+							"key": "danger",
+							"name": "危險程度"
 						}
 					],
-					"title": "Youbike設站狀態",
+					"title": "交通危險程度",
 					"type": "fill"
 				}
 			],
@@ -4665,6 +4655,104 @@
 					],
 					"title": "Youbike設站狀態",
 					"type": "line"
+				}
+			],
+			"source": "資訊局",
+			"time_from": "2023-07-01T00:00:00+08:00",
+			"time_to": null,
+			"short_desc": "",
+			"long_desc": "將全市用250見方的網格表示，依據各網格條件分為可設站及無法設站。可設站網格包含已設站、未設站及鄰近已設站。無法設站網格的類型包含山區、土地限制及特殊條件。土地限制為根據國土利用現況調查結果不適合開發之區域，特殊條件為軍方用地或無設站空間。資料來源為大數據中心研究，更新頻率不定期。",
+			"use_case": "本組件可讓您快速查看各區域的YouBike設站情況。了解哪些區域已提供YouBike服務?哪些因為土地或地形限制無法設站?哪些地區目前未設站但具有設站潛能。",
+			"links": [
+				"https://tuic.gov.taipei/youbike",
+				"https://github.com/tpe-doit/YouBike-Optimization"
+			],
+			"tags": [],
+			"contributors": ["tuic"]
+		},
+		"1006": {
+			"name": "等高線公車距離",
+			"id": 1006,
+			"index": "busDist",
+			"chart_config": {
+				"types": ["TreemapChart", "BarChart"],
+				"unit": "個網格",
+				"color": [
+					"#7FBF7B",
+					"#8E8E8E",
+					"#40A461",
+					"#BEBEBE",
+					"#3D56FF",
+					"#BFDAB8",
+					"#ACCFFF"
+				],
+				"map_filter": [
+					"ppl",
+					[0,1]
+				]
+			},
+			"map_config": [
+				{
+					"index": "_poc_poly1",
+					"paint": {
+						"fill-color": "blue"
+					},
+					"property": [
+						{
+							"key": "pop_live",
+							"name": "居住推估人數"
+						},
+						{
+							"key": "pop_work",
+							"name": "工作推估人數"
+						}
+					],
+					"type": "fill",
+					"size": null,
+					"icon": null,
+					"title": "居職人口推估"
+				},
+				{
+					"index": "_poc_poly2",
+					"paint": {
+						"fill-color": "red"
+					},
+					"property": [
+						{
+							"key": "pop_live",
+							"name": "居住推估人數"
+						},
+						{
+							"key": "pop_work",
+							"name": "工作推估人數"
+						}
+					],
+					"type": "fill",
+					"size": null,
+					"icon": null,
+					"title": "居職人口推估"
+
+				},
+				{
+					"index": "_poc_poly3",
+					"paint": {
+						"fill-color": "green"
+					},
+					"property": [
+						{
+							"key": "pop_live",
+							"name": "居住推估人數"
+						},
+						{
+							"key": "pop_work",
+							"name": "工作推估人數"
+						}
+					],
+					"type": "fill",
+					"size": null,
+					"icon": null,
+					"title": "居職人口推估"
+
 				}
 			],
 			"source": "資訊局",

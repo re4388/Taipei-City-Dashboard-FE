@@ -287,6 +287,20 @@ export const maplayerCommonLayout = {
 	"symbol-triangle_white": {
 		"icon-image": "triangle_white",
 	},
+	"symbol-parent_0": {
+		"icon-image": "parent_0",
+		"icon-size": [
+			"interpolate",
+			["linear"],
+			["zoom"],
+			11.99,
+			0.7,
+			14,
+			1.1,
+			22,
+			1.4,
+		],
+	},
 	"symbol-youbike": {
 		"icon-image": [
 			"case",
