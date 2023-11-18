@@ -4098,7 +4098,9 @@
 			"long_desc": "// todo顯示緊急救護的上月統計資訊，資料來源為台北市消防局內部資料，每月更新。",
 			"use_case": "// todo瞭解緊急救護服務案件的統計資訊，有助於優化救護服務的配置及應急措施。",
 			"links": null,
-			"tags": [],
+			"tags": [
+				"https://data.taipei/dataset/detail?id=64c8a3a0-3b9a-4f49-a13a-fb1eb2ffa4b1"
+			],
 			"contributors": ["tuic"]
 		},
 		"302": {
@@ -4111,7 +4113,7 @@
 				"unit": "個"
 			},
 			"name": "共融式遊戲場",
-			"source": "民政局",
+			"source": "社會局",
 			"history_data": false,
 			"time_from": "2022-01-01T14:50:55+08:00",
 			"time_to": "2023-10-01T00:00:00+08:00",
@@ -4121,7 +4123,9 @@
 			"long_desc": "// todo顯示緊急救護的上月統計資訊，資料來源為台北市消防局內部資料，每月更新。",
 			"use_case": "// todo瞭解緊急救護服務案件的統計資訊，有助於優化救護服務的配置及應急措施。",
 			"links": null,
-			"tags": [],
+			"tags": [
+				"https://data.taipei/dataset/detail?id=2704f07d-4d1d-4cef-b53a-c44aef326d96"
+			],
 			"contributors": ["tuic"]
 		},
 		"303": {
@@ -4198,17 +4202,14 @@
 				"yMin": -4000
 			},
 			"name": "車禍_幼年人口",
-			"source": "資訊局",
+			"source": "警察局交通大隊&民政局",
 			"time_from": "2023-07-28T00:00:00+08:00",
 			"time_to": null,
 			"short_desc": "",
 			"long_desc": "展示YouBike未設站區的潛在用車需求，這些資訊基於大數據中心研究提供，詳細預測方法可參考開源成果Github，更新頻率不定期。",
 			"use_case": "YouBike未設站區潛在需求將協助您了解未來可能需要增設YouBike站點的地區。這有助於規劃YouBike的擴展和改進，以滿足日益增長的需求。",
+			"links": null,
 			"tags": [],
-			"links": [
-				"https://tuic.gov.taipei/youbike",
-				"https://github.com/tpe-doit/YouBike-Optimization"
-			],
 			"contributors": ["tuic"]
 		},
 		"306": {
@@ -4222,18 +4223,21 @@
 				"yaxisUnit": "m",
 				"backgrounds": [
 					{
-						"name": "建議搭捷運"
+						"name": "建議搭捷運",
+						"color": "#f5c489"
 					},
 					{
 						"name": "交通方便"
 					},
 					{
-						"name": "交通不便"
+						"name": "交通不便",
+						"color": "#f75d52"
 					},
 					{
 						"name": "建議開車"
 					}
-				]
+				],
+				"map_config": []
 			},
 			"name": "車位數_捷運站距離",
 			"source": "衛生福利部社會及家庭署",
@@ -4245,6 +4249,27 @@
 			"short_desc": "// todo 顯示緊急救護的上月統計資訊",
 			"long_desc": "// todo顯示緊急救護的上月統計資訊，資料來源為台北市消防局內部資料，每月更新。",
 			"use_case": "// todo瞭解緊急救護服務案件的統計資訊，有助於優化救護服務的配置及應急措施。",
+			"links": null,
+			"tags": [],
+			"contributors": ["tuic"]
+		},
+		"307": {
+			"id": 307,
+			"index": "parent_child_center_traffic",
+			"chart_config": {
+				"types": ["HeatmapChart"],
+				"hideTitle": true,
+				"categories": ["MRT", "Park", "Bus", "Bus 2", "Bus 3"],
+				"color": ["#FF1700", "#FF8E00", "#9FE6A0"],
+				"unit": "千次"
+			},
+			"name": "YouBike週末群像",
+			"source": "臺北大數據中心",
+			"time_from": "2023-07-28T00:00:00+08:00",
+			"time_to": null,
+			"short_desc": "",
+			"long_desc": "除了展示週末全市YouBike的行政區起訖交易數量，可查閱地圖資料顯示詳細的起迄站點分佈(為避免雜訊影響閱讀，只顯示月交易量>35次的起訖)。資料來源為臺北大數據中心研究，更新頻率為不定期。",
+			"use_case": "透過本組件的起訖分佈，您可以發現使用者在週末如何透過YouBike移動，對於規劃大眾運輸與最後一哩路有相當幫助。",
 			"links": null,
 			"tags": [],
 			"contributors": ["tuic"]

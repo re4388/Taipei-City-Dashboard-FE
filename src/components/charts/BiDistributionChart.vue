@@ -55,7 +55,7 @@ const parsedSeries = computed(() => {
 						{
 							value: parsedGoal,
 							strokeWidth: 3,
-							strokeColor: "#775DD0",
+							strokeColor: "#feb019",
 						},
 					];
 				}
@@ -94,6 +94,10 @@ const chartOptions = ref({
 		onItemClick: {
 			toggleDataSeries: false,
 		},
+		customLegendItems: [
+			...props.series.map((item) => item.name),
+			"去年比較",
+		],
 	},
 	plotOptions: {
 		bar: {
