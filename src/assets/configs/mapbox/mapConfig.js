@@ -1,18 +1,19 @@
 // Initial Position and Settings
+// 這邊就是放 mapboxGL JS map 的 屬性
 export const MapObjectConfig = {
 	antialias: true,
 	container: "mapboxBox",
 	center: [121.536609, 25.044808],
+	// comment 掉讓我可以看到全世界的地圖
 	maxBounds: [
 		[121.3870596781498, 24.95733863075891], // Southwest coordinates
 		[121.6998231749096, 25.21179993640203], // Northeast coordinates
 	],
 	zoom: 12.5,
-	minZoom: 11,
+	minZoom: 11, // comment 掉讓我可以看到全世界的地圖
 	maxZoom: 22,
 	projection: "globe", // display the map as a 3D globe
 };
-
 // Styles for base layer "Taipei Town"
 export const TaipeiTown = {
 	id: "taipei_town",

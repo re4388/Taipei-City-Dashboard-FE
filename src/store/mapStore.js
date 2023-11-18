@@ -21,13 +21,16 @@ import {
 	MapObjectConfig,
 	TaipeiTown,
 	TaipeiVillage,
-	TaipeiBuilding,
+	// TaipeiBuilding,
 	maplayerCommonPaint,
-	maplayerCommonLayout,
+	maplayerCommonLayout
 } from "../assets/configs/mapbox/mapConfig.js";
 import { savedLocations } from "../assets/configs/mapbox/savedLocations.js";
 import { calculateGradientSteps } from "../assets/configs/mapbox/arcGradient";
 import MapPopup from "../components/map/MapPopup.vue";
+import { customMapIndex } from "./customMapIndex.js";
+import { CircleDonutChartMap } from "./circleDonutChartMap.js";
+import { CircleDonutChartMapV2 } from "./circleDonutChartMapV2.js";
 
 const { BASE_URL } = import.meta.env;
 
@@ -46,27 +49,50 @@ export const useMapStore = defineStore("map", {
 		// Stores saved locations
 		savedLocations: savedLocations,
 		// Store currently loading layers,
-		loadingLayers: [],
+		loadingLayers: []
 	}),
 	getters: {},
 	actions: {
 		/* Initialize Mapbox */
-		// 1. Creates the mapbox instance and passes in initial configs
 		initializeMapBox() {
+			this.circleDonutChartMap = new CircleDonutChartMap();
+			this.circleDonutChartMapV2 = new CircleDonutChartMapV2();
+
+
 			this.map = null;
 			const MAPBOXTOKEN = import.meta.env.VITE_MAPBOXTOKEN;
 			mapboxGl.accessToken = MAPBOXTOKEN;
 			this.map = new mapboxGl.Map({
 				...MapObjectConfig,
-				style: mapStyle,
+				style: mapStyle
 			});
+			// 增加控制
 			this.map.addControl(new mapboxGl.NavigationControl());
+
+			// 雙點 zoom 取消
 			this.map.doubleClickZoom.disable();
+
+
 			this.map
+
+				.on("render", () => {
+					// this.circleDonutChartMap.onRender(this.map);
+					this.circleDonutChartMapV2.onRender(this.map);
+
+				})
+
+
 				.on("style.load", () => {
 					this.initializeBasicLayers();
 				})
+
+
 				.on("click", (event) => {
+
+					// disable popup click event for this data source
+					this.circleDonutChartMapV2.onClick(this.map);
+
+
 					if (this.popup) {
 						this.popup = null;
 					}
@@ -78,39 +104,34 @@ export const useMapStore = defineStore("map", {
 					);
 				});
 		},
+
+		// 這邊會疊上基本的圖層（source + layer ）
 		// 2. Adds three basic layers to the map (Taipei District, Taipei Village labels, and Taipei 3D Buildings)
 		// Due to performance concerns, Taipei 3D Buildings won't be added in the mobile version
 		initializeBasicLayers() {
 			const authStore = useAuthStore();
+
 			fetch(`${BASE_URL}/mapData/taipei_town.geojson`)
 				.then((response) => response.json())
 				.then((data) => {
 					this.map
 						.addSource("taipei_town", {
 							type: "geojson",
-							data: data,
+							data: data
 						})
 						.addLayer(TaipeiTown);
 				});
+
 			fetch(`${BASE_URL}/mapData/taipei_village.geojson`)
 				.then((response) => response.json())
 				.then((data) => {
 					this.map
 						.addSource("taipei_village", {
 							type: "geojson",
-							data: data,
+							data: data
 						})
 						.addLayer(TaipeiVillage);
 				});
-			if (!authStore.isMobileDevice) {
-				this.map
-					.addSource("taipei_building_3d_source", {
-						type: "vector",
-						url: import.meta.env.VITE_MAPBOXTILE,
-					})
-					.addLayer(TaipeiBuilding);
-			}
-
 			this.addSymbolSources();
 		},
 		// 3. Adds symbols that will be used by some map layers
@@ -121,7 +142,7 @@ export const useMapStore = defineStore("map", {
 				"triangle_white",
 				"bike_green",
 				"bike_orange",
-				"bike_red",
+				"bike_red"
 			];
 			images.forEach((element) => {
 				this.map.loadImage(
@@ -136,9 +157,15 @@ export const useMapStore = defineStore("map", {
 
 		/* Adding Map Layers */
 		// 1. Passes in the map_config (an Array of Objects) of a component and adds all layers to the map layer list
-		addToMapLayerList(map_config) {
-			map_config.forEach((element) => {
-				let mapLayerId = `${element.index}-${element.type}`;
+		addToMapLayerList(map_configs) {
+
+			map_configs.forEach((map_config) => {
+				let mapLayerId = `${map_config.index}-${map_config.type}`;
+				console.log("=====> mapLayerId: ", mapLayerId);
+				// =====> mapLayerId:  benHu_earthquake-circle
+				// =====> mapLayerId:  benHu_earthquake-symbol
+
+
 				// 1-1. If the layer exists, simply turn on the visibility and add it to the visible layers list
 				if (
 					this.currentLayers.find((element) => element === mapLayerId)
@@ -154,7 +181,8 @@ export const useMapStore = defineStore("map", {
 					}
 					return;
 				}
-				let appendLayerId = { ...element };
+
+				let appendLayerId = { ...map_config };
 				appendLayerId.layerId = mapLayerId;
 				// 1-2. If the layer doesn't exist, call an API to get the layer data
 				this.loadingLayers.push(appendLayerId.layerId);
@@ -172,10 +200,17 @@ export const useMapStore = defineStore("map", {
 		},
 		// 3. Add the layer data as a source in mapbox
 		addMapLayerSource(map_config, data) {
-			this.map.addSource(`${map_config.layerId}-source`, {
-				type: "geojson",
-				data: { ...data },
-			});
+
+			if (map_config.index === customMapIndex.bubbleDonutChart2) {
+				this.circleDonutChartMapV2.setupDataSource(this.map, map_config, data);
+			} else {
+				this.map.addSource(`${map_config.layerId}-source`, {
+					type: "geojson",
+					// 這邊的 data 就是  地震的 的 geoJason data
+					data: { ...data }
+				});
+			}
+
 			if (map_config.type === "arc") {
 				this.AddArcMapLayer(map_config, data);
 			} else {
@@ -191,12 +226,12 @@ export const useMapStore = defineStore("map", {
 				extra_paint_configs = {
 					...maplayerCommonPaint[
 						`${map_config.type}-${map_config.icon}`
-					],
+						]
 				};
 				extra_layout_configs = {
 					...maplayerCommonLayout[
 						`${map_config.type}-${map_config.icon}`
-					],
+						]
 				};
 			}
 			if (map_config.size) {
@@ -204,30 +239,40 @@ export const useMapStore = defineStore("map", {
 					...extra_paint_configs,
 					...maplayerCommonPaint[
 						`${map_config.type}-${map_config.size}`
-					],
+						]
 				};
 				extra_layout_configs = {
 					...extra_layout_configs,
 					...maplayerCommonLayout[
 						`${map_config.type}-${map_config.size}`
-					],
+						]
 				};
 			}
+
 			this.loadingLayers.push("rendering");
-			this.map.addLayer({
-				id: map_config.layerId,
-				type: map_config.type,
-				paint: {
-					...maplayerCommonPaint[`${map_config.type}`],
-					...extra_paint_configs,
-					...map_config.paint,
-				},
-				layout: {
-					...maplayerCommonLayout[`${map_config.type}`],
-					...extra_layout_configs,
-				},
-				source: `${map_config.layerId}-source`,
-			});
+
+			if (map_config.index === customMapIndex.bubbleDonutChart2) {
+
+				this.circleDonutChartMapV2.setupStyleLayerAndDonutChart(extra_paint_configs, extra_layout_configs);
+
+			} else {
+				this.map.addLayer({
+					id: map_config.layerId,
+					type: map_config.type,
+					paint: {
+						...maplayerCommonPaint[`${map_config.type}`],
+						...extra_paint_configs,
+						...map_config.paint
+					},
+					layout: {
+						...maplayerCommonLayout[`${map_config.type}`],
+						...extra_layout_configs
+					},
+					source: `${map_config.layerId}-source`
+				});
+			}
+
+
 			this.currentLayers.push(map_config.layerId);
 			this.mapConfigs[map_config.layerId] = map_config;
 			this.currentVisibleLayers.push(map_config.layerId);
@@ -263,7 +308,7 @@ export const useMapStore = defineStore("map", {
 					line.push([
 						lines[i].geometry.coordinates[0][0] + lngInterval * j,
 						lines[i].geometry.coordinates[0][1] + latInterval * j,
-						waypointElevation,
+						waypointElevation
 					]);
 				}
 
@@ -283,7 +328,7 @@ export const useMapStore = defineStore("map", {
 					id: map_config.layerId,
 					type: "custom",
 					renderingMode: "3d",
-					onAdd: function () {
+					onAdd: function() {
 						const paintSettings = map_config.paint
 							? map_config.paint
 							: { "arc-color": ["#ffffff"] };
@@ -305,7 +350,7 @@ export const useMapStore = defineStore("map", {
 									paintSettings["arc-opacity"] ||
 									paintSettings["arc-opacity"] === 0
 										? paintSettings["arc-opacity"]
-										: 0.5,
+										: 0.5
 							};
 
 							let lineMesh = tb.line(lineOptions);
@@ -315,9 +360,9 @@ export const useMapStore = defineStore("map", {
 							tb.add(lineMesh);
 						}
 					},
-					render: function () {
+					render: function() {
 						tb.update(); //update Threebox scene
-					},
+					}
 				});
 				this.currentLayers.push(map_config.layerId);
 				this.mapConfigs[map_config.layerId] = map_config;
@@ -329,12 +374,16 @@ export const useMapStore = defineStore("map", {
 		},
 		//  5. Turn on the visibility for a exisiting map layer
 		turnOnMapLayerVisibility(mapLayerId) {
+			console.log("=====> turnOnMapLayerVisibility mapLayerId: ", mapLayerId);
+
+
 			this.map.setLayoutProperty(mapLayerId, "visibility", "visible");
 		},
 		// 6. Turn off the visibility of an exisiting map layer but don't remove it completely
-		turnOffMapLayerVisibility(map_config) {
-			map_config.forEach((element) => {
-				let mapLayerId = `${element.index}-${element.type}`;
+		turnOffMapLayerVisibility(map_configs) {
+			map_configs.forEach((map_config) => {
+				let mapLayerId = `${map_config.index}-${map_config.type}`;
+				console.log("=====> turnOffMapLayerVisibility mapLayerId: ", mapLayerId);
 				this.loadingLayers = this.loadingLayers.filter(
 					(el) => el !== mapLayerId
 				);
@@ -361,7 +410,7 @@ export const useMapStore = defineStore("map", {
 			const clickFeatureDatas = this.map.queryRenderedFeatures(
 				event.point,
 				{
-					layers: this.currentVisibleLayers,
+					layers: this.currentVisibleLayers
 				}
 			);
 			// Return if there is no info in the click
@@ -384,7 +433,7 @@ export const useMapStore = defineStore("map", {
 			// Create a new mapbox popup
 			this.popup = new mapboxGl.Popup()
 				.setLngLat(event.lngLat)
-				.setHTML('<div id="vue-popup-content"></div>')
+				.setHTML("<div id=\"vue-popup-content\"></div>")
 				.addTo(this.map);
 			// Mount a vue component (MapPopup) to the id "vue-popup-content" and pass in data
 			const PopupComponent = defineComponent({
@@ -394,9 +443,9 @@ export const useMapStore = defineStore("map", {
 					return {
 						popupContent: parsedPopupContent,
 						mapConfigs: mapConfigs,
-						activeTab: ref(0),
+						activeTab: ref(0)
 					};
-				},
+				}
 			});
 			// This helps vue determine the most optimal time to mount the component
 			nextTick(() => {
@@ -430,7 +479,7 @@ export const useMapStore = defineStore("map", {
 				zoom: location_array[1],
 				duration: 4000,
 				pitch: location_array[2],
-				bearing: location_array[3],
+				bearing: location_array[3]
 			});
 		},
 		// Remove a saved location
@@ -449,14 +498,35 @@ export const useMapStore = defineStore("map", {
 		/* Map Filtering */
 		// Add a filter based on a property on a map layer
 		addLayerFilter(layer_id, property, key, map_config) {
+			console.log("addLayerFilter");
 			const dialogStore = useDialogStore();
 			if (!this.map || dialogStore.dialogs.moreInfo) {
 				return;
 			}
+
+
+			// =====> mapLayerId:  _pocMapFilterLine-line
+			// =====> mapLayerId:  _pocMapFilterPoint-circle
+
+
+			if (this.map.getSource(`_pocMapFilterLine-line-source`) || this.map.getSource(`_pocMapFilterPoint-circle-source`)) {
+				console.log("go inside condition");
+				this.map.setFilter(
+					"_pocMapFilterLine-line",
+					["==", ["get", property], key]
+				);
+				this.map.setFilter(
+					"_pocMapFilterPoint-circle",
+					["==", ["get", property], key]
+				);
+				return;
+			}
+
+
 			if (map_config && map_config.type === "arc") {
 				this.map.removeLayer(layer_id);
 				let toBeFiltered = {
-					...this.map.getSource(`${layer_id}-source`)._data,
+					...this.map.getSource(`${layer_id}-source`)._data
 				};
 				toBeFiltered.features = toBeFiltered.features.filter(
 					(el) => el.properties[property] === key
@@ -473,10 +543,22 @@ export const useMapStore = defineStore("map", {
 			if (!this.map || dialogStore.dialogs.moreInfo) {
 				return;
 			}
+
+			// if (this.map.getSource(`benHu_earthquake-circle-source`) || this.map.getSource(`benHu_earthquake-symbol-source`)){
+			// 	console.log("qq");
+			// 	this.map.setFilter("benHu_earthquake-circle", null);
+			//
+			// 	this.map.setFilter(
+			// 		"benHu_earthquake-symbol",
+			// 		null);
+			// 	return
+			// }
+
+
 			if (map_config && map_config.type === "arc") {
 				this.map.removeLayer(layer_id);
 				let toRestore = {
-					...this.map.getSource(`${layer_id}-source`)._data,
+					...this.map.getSource(`${layer_id}-source`)._data
 				};
 				map_config.layerId = layer_id;
 				this.AddArcMapLayer(map_config, toRestore);
@@ -489,9 +571,9 @@ export const useMapStore = defineStore("map", {
 
 		// Called when the user is switching between maps
 		clearOnlyLayers() {
-			this.currentLayers.forEach((element) => {
-				this.map.removeLayer(element);
-				this.map.removeSource(`${element}-source`);
+			this.currentLayers.forEach((layer) => {
+				this.map.removeLayer(layer);
+				this.map.removeSource(`${layer}-source`);
 			});
 			this.currentLayers = [];
 			this.mapConfigs = {};
@@ -505,6 +587,7 @@ export const useMapStore = defineStore("map", {
 			this.map = null;
 			this.currentVisibleLayers = [];
 			this.removePopup();
-		},
-	},
+		}
+	}
 });
+

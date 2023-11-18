@@ -148,6 +148,7 @@ export const useContentStore = defineStore("content", {
 		// Will call an additional API if the component has history data
 		setCurrentDashboardChartData() {
 			this.currentDashboard.content.forEach((component, index) => {
+				console.log('loading chartData: ', `${BASE_URL}/chartData/${component.id}.json`);
 				axios
 					.get(`${BASE_URL}/chartData/${component.id}.json`)
 					.then((rs) => {
