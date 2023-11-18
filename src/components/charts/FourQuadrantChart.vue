@@ -11,6 +11,36 @@ const hexToRgba = (hex, opacity) => {
 	return `rgba(${r}, ${g}, ${b}, ${opacity})`;
 };
 
+const X_AXIS_MIN = -1;
+const X_AXIS_MAX = 8;
+const Y_AXIS_MIN = -1;
+const Y_AXIS_MAX = 8;
+const X_AXIS_MID = 3.5;
+const Y_AXIS_MID = 3.5;
+
+const DEFAULT_BACKGROUND_CONFIG = [
+	{
+		color: "#f75d52",
+		top: "0",
+		left: "0",
+	},
+	{
+		color: "#29c22b",
+		top: "0",
+		left: "50%",
+	},
+	{
+		color: "#f5c489",
+		top: "50%",
+		left: "0",
+	},
+	{
+		color: "#436ce8",
+		top: "50%",
+		left: "50%",
+	},
+];
+
 const props = defineProps([
 	"chart_config",
 	"activeChart",
@@ -19,6 +49,44 @@ const props = defineProps([
 ]);
 
 const chartRef = ref(null);
+
+const backgroundSettings = computed(() => {
+	return props.chart_config.backgrounds.map((item, index) => {
+		return Object.assign(DEFAULT_BACKGROUND_CONFIG[index], item);
+	});
+});
+
+const legendClickHandler = (quadrant) => {
+	switch (quadrant) {
+		case 0:
+			props.series.map(({ data, name }) => {
+				if (data.x < X_AXIS_MID && data.y > Y_AXIS_MID)
+					chartRef.value.toggleSeries(name);
+			});
+			break;
+		case 1:
+			props.series.map(({ data, name }) => {
+				if (data.x > X_AXIS_MID && data.y > Y_AXIS_MID)
+					chartRef.value.toggleSeries(name);
+			});
+			break;
+		case 2:
+			props.series.map(({ data, name }) => {
+				if (data.x < X_AXIS_MID && data.y < Y_AXIS_MID)
+					chartRef.value.toggleSeries(name);
+			});
+			break;
+		case 3:
+			props.series.map(({ data, name }) => {
+				if (data.x > X_AXIS_MID && data.y < Y_AXIS_MID)
+					chartRef.value.toggleSeries(name);
+			});
+			break;
+
+		default:
+			break;
+	}
+};
 
 const chartOptions = ref({
 	chart: {
@@ -43,6 +111,7 @@ const chartOptions = ref({
 			fontSize: "10px",
 		},
 	},
+	color: props.chart_config.colors,
 	legend: {
 		show: false,
 	},
@@ -50,21 +119,30 @@ const chartOptions = ref({
 		show: false,
 	},
 	markers: {
+		colors: props.chart_config.colors,
 		hover: {
 			size: 8,
 		},
 	},
 	tooltip: {
-		custom: function ({ series, seriesIndex, dataPointIndex, w }) {
+		custom: function ({ seriesIndex }) {
 			return (
 				'<div class="chart-tooltip">' +
 				"<h6>" +
 				props.series[seriesIndex].name +
 				"</h6>" +
 				"<span>" +
-				`${props.chart_config.xaxisUnit}:${w.globals.seriesX[seriesIndex][dataPointIndex]}` +
+				`${
+					props.chart_config.xaxisLabel
+				}:${new Intl.NumberFormat().format(
+					props.series[seriesIndex].data.x_value
+				)}${props.chart_config.xaxisUnit}` +
 				"<br />" +
-				`${props.chart_config.yaxisUnit}:${series[seriesIndex][dataPointIndex]}` +
+				`${
+					props.chart_config.yaxisLabel
+				}:${new Intl.NumberFormat().format(
+					props.series[seriesIndex].data.y_value
+				)}${props.chart_config.yaxisUnit}` +
 				"</span>" +
 				"</div>"
 			);
@@ -72,7 +150,16 @@ const chartOptions = ref({
 		followCursor: true,
 	},
 	xaxis: {
+		axisBorder: {
+			show: false,
+		},
+		show: false,
 		tickAmount: 5,
+		min: X_AXIS_MIN,
+		max: X_AXIS_MAX,
+		labels: {
+			show: false,
+		},
 		axisTicks: {
 			show: false,
 		},
@@ -81,7 +168,10 @@ const chartOptions = ref({
 		},
 	},
 	yaxis: {
+		show: false,
 		tickAmount: 5,
+		min: Y_AXIS_MIN,
+		max: Y_AXIS_MAX,
 	},
 	stroke: {
 		colors: ["#282a2c"],
@@ -97,11 +187,14 @@ onMounted(() => {
 });
 
 const drawBg = () => {
-	if (props.chart_config.backgrounds.length === 0) {
-		return;
-	}
-	const bgs = props.chart_config.backgrounds;
-	const { width, height } = getSize();
+	if (backgroundSettings.value.length === 0) return;
+
+	const ele = chartRef.value.$el.querySelector(".apexcharts-grid");
+
+	if (ele.querySelector("foreignObject")) return;
+
+	const bgs = backgroundSettings.value;
+	const { width, height } = ele.getBoundingClientRect();
 	const ns = "http://www.w3.org/2000/svg";
 	const foreignObject = document.createElementNS(ns, "foreignObject");
 
@@ -113,27 +206,25 @@ const drawBg = () => {
 	for (let i = 0; i < bgs.length; i++) {
 		const bg = bgs[i];
 		const div = document.createElement("div");
+
+		const color = bg.color ? bg.color : DEFAULT_BACKGROUND_CONFIG[i].color;
+
+		const transparency = color === "#ffffff" ? 0 : 0.2;
+
 		div.setAttribute(
 			"style",
-			`position: absolute; width: ${bg.width}; height: ${
-				bg.height
-			}; top: ${bg.top}; left: ${bg.left}; border: 2px solid ${
-				bg.color
-			}; box-sizing: border-box; background: ${hexToRgba(bg.color, 0.2)}`
+			`position: absolute; 
+			width: 50%; 
+			height: 50%; 
+			top: ${DEFAULT_BACKGROUND_CONFIG[i].top}; 
+			left: ${DEFAULT_BACKGROUND_CONFIG[i].left}; 
+			border: 2px solid ${hexToRgba(color, transparency)};
+			box-sizing: border-box; background: ${hexToRgba(color, transparency)}`
 		);
 		foreignObject.appendChild(div);
 	}
-	chartRef.value.$el.querySelector(".apexcharts-grid").append(foreignObject);
-};
 
-const getSize = () => {
-	const element = chartRef.value.$el.querySelector(".apexcharts-grid");
-	const domData = element.getBoundingClientRect();
-
-	return {
-		width: domData.width,
-		height: domData.height,
-	};
+	ele.append(foreignObject);
 };
 
 const onChartUpdated = () => {
@@ -171,7 +262,7 @@ const parsedSeries = computed(() => {
 			}"
 		>
 			<div
-				v-for="backgroundSetting in props.chart_config.backgrounds"
+				v-for="(backgroundSetting, index) in backgroundSettings"
 				:key="backgroundSetting.color"
 				class="apexcharts-legend-series"
 				:style="{
@@ -180,6 +271,7 @@ const parsedSeries = computed(() => {
 					justifyContent: 'center',
 					marginLeft: '10px',
 				}"
+				@click="legendClickHandler(index)"
 			>
 				<div
 					class="apexcharts-legend-marker"

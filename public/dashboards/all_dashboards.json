@@ -3,7 +3,7 @@
 		{
 			"name": "祝你好孕",
 			"index": "good-pregnant",
-			"components": ["301"],
+			"components": ["306", "305", "301", "302", "303", "304"],
 			"icon": "pregnant_woman"
 		},
 		{

@@ -4083,17 +4083,183 @@
 			"index": "child_count",
 			"map_config": null,
 			"chart_config": {
-				"color": ["#bc7262"],
+				"color": ["#14660E"],
 				"types": ["DistrictChart", "RadarChart", "ColumnChart"],
 				"unit": "人"
 			},
 			"name": "各行政區 0~6 歲人口數量",
+			"source": "民政局",
+			"history_data": true,
+			"time_from": "2022-01-01T14:50:55+08:00",
+			"time_to": "2023-10-01T00:00:00+08:00",
+			"update_freq": 1,
+			"update_freq_unit": "month",
+			"short_desc": "// todo 顯示緊急救護的上月統計資訊",
+			"long_desc": "// todo顯示緊急救護的上月統計資訊，資料來源為台北市消防局內部資料，每月更新。",
+			"use_case": "// todo瞭解緊急救護服務案件的統計資訊，有助於優化救護服務的配置及應急措施。",
+			"links": null,
+			"tags": [],
+			"contributors": ["tuic"]
+		},
+		"302": {
+			"id": 302,
+			"index": "child_count",
+			"map_config": null,
+			"chart_config": {
+				"color": ["#14660E"],
+				"types": ["ColumnChart", "DistrictChart", "RadarChart"],
+				"unit": "個"
+			},
+			"name": "共融式遊戲場",
 			"source": "民政局",
 			"history_data": false,
 			"time_from": "2022-01-01T14:50:55+08:00",
 			"time_to": "2023-10-01T00:00:00+08:00",
 			"update_freq": 1,
 			"update_freq_unit": "month",
+			"short_desc": "// todo 顯示緊急救護的上月統計資訊",
+			"long_desc": "// todo顯示緊急救護的上月統計資訊，資料來源為台北市消防局內部資料，每月更新。",
+			"use_case": "// todo瞭解緊急救護服務案件的統計資訊，有助於優化救護服務的配置及應急措施。",
+			"links": null,
+			"tags": [],
+			"contributors": ["tuic"]
+		},
+		"303": {
+			"id": 303,
+			"index": "child_care_center",
+			"chart_config": {
+				"color": [
+					"#14660E",
+					"#247C17",
+					"#3C9A25",
+					"#58B836",
+					"#78D64B",
+					"#A1E676",
+					"#BFF294",
+					"#DBFAB9",
+					"#EFFCDC"
+				],
+				"types": ["FourQuadrantChart"],
+				"xaxisUnit": "0-6歲人口數",
+				"yaxisUnit": "安全指數",
+				"backgrounds": [
+					{
+						"name": "Happy"
+					},
+					{
+						"name": "Happy 2"
+					},
+					{
+						"name": "Not Happy"
+					},
+					{
+						"name": "Not Happy 2"
+					}
+				]
+			},
+			"name": "安全之路",
+			"source": "衛生福利部社會及家庭署",
+			"history_data": false,
+			"time_from": null,
+			"time_to": null,
+			"update_freq": null,
+			"update_freq_unit": null,
+			"short_desc": "// todo 顯示緊急救護的上月統計資訊",
+			"long_desc": "// todo顯示緊急救護的上月統計資訊，資料來源為台北市消防局內部資料，每月更新。",
+			"use_case": "// todo瞭解緊急救護服務案件的統計資訊，有助於優化救護服務的配置及應急措施。",
+			"links": null,
+			"tags": [],
+			"contributors": ["tuic"]
+		},
+		"304": {
+			"id": 304,
+			"index": "traffic_accident_2",
+			"map_config": null,
+			"chart_config": {
+				"color": ["#14660E"],
+				"types": ["RadarChart", "DistrictChart", "ColumnChart"],
+				"unit": "個"
+			},
+			"name": "交通事故",
+			"source": "民政局",
+			"history_data": true,
+			"time_from": "2022-01-01T14:50:55+08:00",
+			"time_to": "2023-10-01T00:00:00+08:00",
+			"update_freq": 1,
+			"update_freq_unit": "month",
+			"short_desc": "// todo 顯示緊急救護的上月統計資訊",
+			"long_desc": "// todo顯示緊急救護的上月統計資訊，資料來源為台北市消防局內部資料，每月更新。",
+			"use_case": "// todo瞭解緊急救護服務案件的統計資訊，有助於優化救護服務的配置及應急措施。",
+			"links": null,
+			"tags": [],
+			"contributors": ["tuic"]
+		},
+		"305": {
+			"id": 305,
+			"index": "elderly_age",
+			"history_data": false,
+			"chart_config": {
+				"types": ["BiDistributionChart"],
+				"unit": "人",
+				"yMax": 17000,
+				"yMin": -4000
+			},
+			"name": "車禍_幼年人口",
+			"source": "資訊局",
+			"time_from": "2023-07-28T00:00:00+08:00",
+			"time_to": null,
+			"short_desc": "",
+			"long_desc": "展示YouBike未設站區的潛在用車需求，這些資訊基於大數據中心研究提供，詳細預測方法可參考開源成果Github，更新頻率不定期。",
+			"use_case": "YouBike未設站區潛在需求將協助您了解未來可能需要增設YouBike站點的地區。這有助於規劃YouBike的擴展和改進，以滿足日益增長的需求。",
+			"tags": [],
+			"links": [
+				"https://tuic.gov.taipei/youbike",
+				"https://github.com/tpe-doit/YouBike-Optimization"
+			],
+			"contributors": ["tuic"]
+		},
+		"306": {
+			"id": 306,
+			"index": "safe_distance",
+			"chart_config": {
+				"color": [
+					"#14660E",
+					"#247C17",
+					"#3C9A25",
+					"#58B836",
+					"#78D64B",
+					"#A1E676",
+					"#BFF294",
+					"#DBFAB9",
+					"#EFFCDC"
+				],
+				"types": ["FourQuadrantChart"],
+				"xaxisLabel": "車位數",
+				"yaxisLabel": "捷運站距離",
+				"xaxisUnit": "個",
+				"yaxisUnit": "m",
+				"backgrounds": [
+					{
+						"name": "建議搭捷運"
+					},
+					{
+						"name": "交通方便"
+					},
+					{
+						"name": "交通不便"
+					},
+					{
+						"name": "最好開車"
+					}
+				]
+			},
+			"name": "車位數_捷運站距離",
+			"source": "衛生福利部社會及家庭署",
+			"history_data": false,
+			"time_from": null,
+			"time_to": null,
+			"update_freq": null,
+			"update_freq_unit": null,
 			"short_desc": "// todo 顯示緊急救護的上月統計資訊",
 			"long_desc": "// todo顯示緊急救護的上月統計資訊，資料來源為台北市消防局內部資料，每月更新。",
 			"use_case": "// todo瞭解緊急救護服務案件的統計資訊，有助於優化救護服務的配置及應急措施。",
