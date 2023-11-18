@@ -18,6 +18,8 @@ const props = defineProps([
 	"map_config",
 ]);
 
+const chartRef = ref(null);
+
 const chartOptions = ref({
 	chart: {
 		type: "scatter",
@@ -25,8 +27,7 @@ const chartOptions = ref({
 			show: false,
 		},
 		zoom: {
-			enabled: true,
-			type: "xy",
+			enabled: false,
 		},
 	},
 	dataLabels: {
@@ -122,13 +123,13 @@ const drawBg = () => {
 		);
 		foreignObject.appendChild(div);
 	}
-	document.querySelector(".apexcharts-grid").append(foreignObject);
+	chartRef.value.$el.querySelector(".apexcharts-grid").append(foreignObject);
 };
 
 const getSize = () => {
-	const domData = document
-		.querySelector(".apexcharts-grid")
-		.getBoundingClientRect();
+	const element = chartRef.value.$el.querySelector(".apexcharts-grid");
+	const domData = element.getBoundingClientRect();
+
 	return {
 		width: domData.width,
 		height: domData.height,
@@ -152,6 +153,7 @@ const parsedSeries = computed(() => {
 <template>
 	<div v-if="activeChart === 'FourQuadrantChart'" class="four-quadrant-chart">
 		<apexchart
+			ref="chartRef"
 			width="100%"
 			height="240px"
 			type="scatter"
@@ -159,8 +161,6 @@ const parsedSeries = computed(() => {
 			:series="parsedSeries"
 			@updated="onChartUpdated"
 		></apexchart>
-
-		<!-- <div class="four-quadrant-chart-legends"></div> -->
 
 		<div
 			class="apexcharts-legend apexcharts-align-center apx-legend-position-bottom"
