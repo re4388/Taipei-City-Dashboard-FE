@@ -35,11 +35,14 @@ const parsedSeries = computed(() => {
 			data: item.data.map((dataItem) => {
 				const isPositive = dataItem.y > 0;
 				let parsedY = null;
+				let parsedGoal = null;
 
 				if (isPositive) {
 					parsedY = dataItem.y / seriesMinMax.value.max;
+					parsedGoal = dataItem.marker / seriesMinMax.value.max;
 				} else {
 					parsedY = -(dataItem.y / seriesMinMax.value.min);
+					parsedGoal = -(dataItem.marker / seriesMinMax.value.min);
 				}
 
 				const obj = {
@@ -47,12 +50,11 @@ const parsedSeries = computed(() => {
 					y: parsedY.toFixed(5),
 				};
 
-				if (dataItem.marker) {
+				if (parsedGoal) {
 					obj.goals = [
 						{
-							name: "Expected",
-							value: dataItem.marker,
-							strokeWidth: 5,
+							value: parsedGoal,
+							strokeWidth: 3,
 							strokeColor: "#775DD0",
 						},
 					];
@@ -108,14 +110,23 @@ const chartOptions = ref({
 	},
 	// The class "chart-tooltip" could be edited in /assets/styles/chartStyles.css
 	tooltip: {
-		custom: function ({ series, seriesIndex, dataPointIndex, w }) {
+		custom: function ({ seriesIndex, dataPointIndex, w }) {
 			return (
 				'<div class="chart-tooltip">' +
 				"<h6>" +
 				w.globals.labels[dataPointIndex] +
 				"</h6>" +
 				"<span>" +
-				Math.abs(props.series[seriesIndex].data[dataPointIndex].y) +
+				`2022年：${Math.abs(
+					props.series[seriesIndex].data[dataPointIndex].y
+				)}` +
+				` ${props.chart_config.unit}` +
+				"</span>" +
+				"</br>" +
+				"<span>" +
+				`2021年：${Math.abs(
+					props.series[seriesIndex].data[dataPointIndex].marker
+				)}` +
 				` ${props.chart_config.unit}` +
 				"</span>" +
 				"</div>"
