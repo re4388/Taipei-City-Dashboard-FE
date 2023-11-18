@@ -1,6 +1,12 @@
 {
 	"data": [
 		{
+			"name": "祝你好孕",
+			"index": "good-pregnant",
+			"components": ["301"],
+			"icon": "pregnant_woman"
+		},
+		{
 			"name": "YouBike研究",
 			"index": "youbike",
 			"components": ["60", "142", "143", "144", "145", "146", "147"],
