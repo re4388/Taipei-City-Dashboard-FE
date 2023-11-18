@@ -4077,6 +4077,29 @@
 				"https://github.com/tpe-doit/YouBike-Optimization"
 			],
 			"contributors": ["tuic"]
+		},
+		"301": {
+			"id": 301,
+			"index": "child_count",
+			"map_config": null,
+			"chart_config": {
+				"color": ["#bc7262"],
+				"types": ["DistrictChart", "RadarChart", "ColumnChart"],
+				"unit": "人"
+			},
+			"name": "各行政區 0~6 歲人口數量",
+			"source": "民政局",
+			"history_data": false,
+			"time_from": "2022-01-01T14:50:55+08:00",
+			"time_to": "2023-10-01T00:00:00+08:00",
+			"update_freq": 1,
+			"update_freq_unit": "month",
+			"short_desc": "// todo 顯示緊急救護的上月統計資訊",
+			"long_desc": "// todo顯示緊急救護的上月統計資訊，資料來源為台北市消防局內部資料，每月更新。",
+			"use_case": "// todo瞭解緊急救護服務案件的統計資訊，有助於優化救護服務的配置及應急措施。",
+			"links": null,
+			"tags": [],
+			"contributors": ["tuic"]
 		}
 	}
 }
