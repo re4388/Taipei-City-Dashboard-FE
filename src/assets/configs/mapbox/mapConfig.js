@@ -301,6 +301,20 @@ export const maplayerCommonLayout = {
 			1.4,
 		],
 	},
+	"symbol-parent_blue": {
+		"icon-image": "parent_blue",
+		"icon-size": [
+			"interpolate",
+			["linear"],
+			["zoom"],
+			11.99,
+			0.7,
+			14,
+			1.1,
+			22,
+			1.4,
+		],
+	},
 	"symbol-youbike": {
 		"icon-image": [
 			"case",

@@ -143,7 +143,8 @@ export const useMapStore = defineStore("map", {
 				"bike_green",
 				"bike_orange",
 				"bike_red",
-				"parent_0"
+				"parent_0",
+				"parent_blue"
 			];
 			images.forEach((element) => {
 				this.map.loadImage(
@@ -505,23 +506,84 @@ export const useMapStore = defineStore("map", {
 				return;
 			}
 
-
-			// =====> mapLayerId:  _pocMapFilterLine-line
-			// =====> mapLayerId:  _pocMapFilterPoint-circle
-
-
-			if (this.map.getSource(`_pocMapFilterLine-line-source`) || this.map.getSource(`_pocMapFilterPoint-circle-source`)) {
+			/**
+			 * 危險程度
+			 */
+			if (this.map.getSource(`_districtPoly-line-source`) ||
+				this.map.getSource(`_timDanger-fill-source`) ||
+				this.map.getSource(`_parentPoint-symbol-source`) )
+			{
 				console.log("go inside condition");
 				this.map.setFilter(
-					"_pocMapFilterLine-line",
+					"_timDanger-fill",
+					["==", ["get", property], key]
+				);
+				// this.map.setFilter(
+				// 	"_districtPoly-line",
+				// 	["==", ["get", property], key]
+				// );
+				// this.map.setFilter(
+				// 	"_parentPoint-symbol",
+				// 	["==", ["get", property], key]
+				// );
+
+				return;
+			}
+
+
+			// 親子館 filter
+			/**
+			 * _nearByParkPoint-circle-source
+			 * _parentCircle-fill-source
+			 * _parentMRT-symbol-source
+			 * _parentPoint-symbol-source
+			 * _parentToMRTLine-line-source
+			 */
+			if (this.map.getSource(`_nearByParkPoint-circle-source`) ||
+				this.map.getSource(`_parentCircle-fill-source`) ||
+				this.map.getSource(`_parentMRT-symbol-source`) ||
+				this.map.getSource(`_parentToMRTLine-line-source`) ||
+				this.map.getSource(`_parentPoint-symbol-source`))
+			{
+				console.log("go inside condition");
+				this.map.setFilter(
+					"_nearByParkPoint-circle",
 					["==", ["get", property], key]
 				);
 				this.map.setFilter(
-					"_pocMapFilterPoint-circle",
+					"_parentCircle-fill",
+					["==", ["get", property], key]
+				);
+				this.map.setFilter(
+					"_parentMRT-symbol",
+					["==", ["get", property], key]
+				);
+				this.map.setFilter(
+					"_parentPoint-symbol",
+					["==", ["get", property], key]
+				);
+				this.map.setFilter(
+					"_parentToMRTLine-line",
 					["==", ["get", property], key]
 				);
 				return;
 			}
+
+
+
+
+			// if (this.map.getSource(`_pocMapFilterLine-line-source`) || this.map.getSource(`_pocMapFilterPoint-circle-source`)) {
+			// 	console.log("go inside condition");
+			// 	this.map.setFilter(
+			// 		"_pocMapFilterLine-line",
+			// 		["==", ["get", property], key]
+			// 	);
+			// 	this.map.setFilter(
+			// 		"_pocMapFilterPoint-circle",
+			// 		["==", ["get", property], key]
+			// 	);
+			// 	return;
+			// }
 
 
 			if (map_config && map_config.type === "arc") {

@@ -4431,6 +4431,8 @@
 			"index": "parentMrtMap",
 			"map_config": [
 				{
+					"title": "停車場",
+					"type": "circle",
 					"index": "_nearByParkPoint",
 					"paint": {
 						"circle-stroke-color": "blue",
@@ -4446,40 +4448,43 @@
 							"key": "Pregnancy_First",
 							"name": "婦幼友善車位"
 						}
-					],
-					"type": "circle",
-					"title": "停車場"
+					]
 
 				},
 				{
+					"title": "鄰近停車位",
 					"index": "_parentCircle",
+					"type": "fill",
 					"paint": {
-						"fill-color": "#958f00"
+						"fill-color": "#b4f71c",
+						"fill-outline-color": "#FAB733"
 					},
 					"property": [
 						{
 							"key": "total",
 							"name": "停車位總和"
 						}
-					],
-					"type": "fill",
-					"title": "鄰近停車位"
+					]
 				},
 				{
+					"title": "親子館共融中心到MRT",
+					"type": "line",
 					"index": "_parentToMRTLine",
 					"paint": {
-						"line-color": "white"
+						"line-color": "white",
+						"line-width": 4
+
 					},
 					"property": [
 						{
 							"key": "distance",
 							"name": "距離(m)"
 						}
-					],
-					"type": "line",
-					"title": "親子館共融中心到MRT"
+					]
 				},
 				{
+					"title": "親子館",
+					"type": "symbol",
 					"index": "_parentPoint",
 					"property": [
 						{
@@ -4495,9 +4500,27 @@
 							"name": "電話"
 						}
 					],
+					"icon": "parent_0"
+				},
+				{
+					"title": "MRT",
 					"type": "symbol",
-					"icon": "parent_0",
-					"title": "親子館"
+					"index": "_parentMRT",
+					"property": [
+						{
+							"key": "name",
+							"name": "捷運站名"
+						},
+						{
+							"key": "exit_name",
+							"name": "出站口"
+						},
+						{
+							"key": "distance",
+							"name": "距離(m)"
+						}
+					],
+					"icon": "metro"
 				}
 			],
 			"chart_config": {
@@ -4510,8 +4533,8 @@
 					"#BEBEBE"
 				],
 				"map_filter": [
-					"type",
-					[0,1,2,3]
+					"quad_x",
+					[1,2,3,4]
 				]
 			},
 			"chart_data": [
@@ -4530,50 +4553,81 @@
 			"contributors": ["tuic"]
 		},
 		"1004": {
-			"name": "意外風險區域",
+			"name": "親子意外風險區域",
 			"id": 1004,
 			"index": "timDanger",
 			"chart_config": {
 				"types": ["TreemapChart", "BarChart"],
 				"unit": "個網格",
 				"color": [
-					"#ffba08",
-					"#faa307",
-					"#f48c06",
-					"#e85d04",
-					"#dc2f02",
+					"#9d0208",
 					"#d00000",
-					"#9d0208"
+					"#dc2f02",
+					"#e85d04",
+					"#f48c06",
+					"#faa307",
+					"#ffba08"
 				],
 				"map_filter": [
 					"danger",
 					[
-						0,
-						1,
-						2,
-						3,
-						4,
-						5
+						2.0,
+						3.0,
+						4.0,
+						5.0
 					]
 				]
 			},
 			"map_config": [
 				{
+					"title": "親子館",
+					"index": "_parentPoint",
+					"type": "symbol",
+					"property": [
+						{
+							"key": "name",
+							"name": "名稱"
+						},
+						{
+							"key": "address",
+							"name": "地址"
+						},
+						{
+							"key": "phone",
+							"name": "電話"
+						}
+					],
+					"icon": "parent_0"
+				},
+				{
+					"title": "交通危險程度",
+					"index": "_districtPoly",
+					"type": "line",
+					"paint": {
+						"line-color": "white",
+						"line-width": 3
+					}
+				},
+				{
+					"title": "交通危險程度",
 					"index": "_timDanger",
+					"type": "fill",
 					"paint": {
 						"fill-color": [
 							"case",
+							["==", ["get", "danger"], 1],
+							"#ACB334",
 							["==", ["get", "danger"], 2],
-							"#f48c06",
+							"#FAB733",
 							["==", ["get", "danger"], 3],
-							"#e85d04",
+							"#FF8E15",
 							["==", ["get", "danger"], 4],
-							"#dc2f02",
+							"#FF4E11",
 							["==", ["get", "danger"], 5],
-							"#d00000",
+							"#FF1E00",
 							"#0F0F0F"
 						],
-						"fill-opacity": 0.5,
+						"fill-opacity": 0.6,
 						"fill-outline-color": "#555555"
 					},
 					"property": [
@@ -4581,9 +4635,7 @@
 							"key": "danger",
 							"name": "危險程度"
 						}
-					],
-					"title": "交通危險程度",
-					"type": "fill"
+					]
 				}
 			],
 			"source": "資訊局",
@@ -4600,12 +4652,14 @@
 			"contributors": ["tuic"]
 		},
 		"1005": {
-			"name": "測試mapFilter",
+			"name": "共融遊戲場",
 			"id": 1005,
-			"index": "youbike_grid",
+			"index": "_playgroundFac",
+
+
 			"chart_config": {
-				"types": ["TreemapChart", "BarChart"],
-				"unit": "個網格",
+				"types": ["BarChart"],
+				"unit": "個",
 				"color": [
 					"#7FBF7B",
 					"#8E8E8E",
@@ -4616,45 +4670,26 @@
 					"#ACCFFF"
 				],
 				"map_filter": [
-					"ppl",
-					[0,1]
+					"facilities_cnt_",
+					["0-2", "3-5", "5up"]
 				]
 			},
 			"map_config": [
 				{
-					"index": "_pocMapFilterPoint",
-					"paint": {
-						"circle-stroke-color": "red",
-						"circle-opacity": 0,
-						"circle-stroke-width": 1.5
-					},
+					"title": "共融中心",
+					"index": "_playground",
+					"type": "symbol",
 					"property": [
 						{
-							"key": "summary",
-							"name": "summary"
+							"key": "name",
+							"name": "名稱"
 						},
 						{
-							"key": "Pregnancy_First",
-							"name": "婦幼友善車位"
+							"key": "facilities",
+							"name": "設施"
 						}
 					],
-					"type": "circle",
-					"title": "停車場"
-
-				},
-				{
-					"index": "_pocMapFilterLine",
-					"paint": {
-						"line-color": "blue"
-					},
-					"property": [
-						{
-							"key": "class",
-							"name": "類型"
-						}
-					],
-					"title": "Youbike設站狀態",
-					"type": "line"
+					"icon": "parent_blue"
 				}
 			],
 			"source": "資訊局",
@@ -4693,50 +4728,57 @@
 			},
 			"map_config": [
 				{
-					"index": "_poc_poly1",
-					"paint": {
-						"fill-color": "blue"
-					},
+					"type": "symbol",
+					"index": "_parentPoint",
 					"property": [
 						{
-							"key": "pop_live",
-							"name": "居住推估人數"
+							"key": "name",
+							"name": "名稱"
 						},
 						{
-							"key": "pop_work",
-							"name": "工作推估人數"
+							"key": "address",
+							"name": "地址"
+						},
+						{
+							"key": "phone",
+							"name": "電話"
 						}
 					],
-					"type": "fill",
-					"size": null,
-					"icon": null,
-					"title": "居職人口推估"
+					"icon": "parent_0",
+					"title": "親子館"
 				},
 				{
-					"index": "_poc_poly2",
+					"index": "_poc_poly4",
 					"paint": {
-						"fill-color": "red"
+						"fill-color": "#CDF5FD"
+
 					},
 					"property": [
-						{
-							"key": "pop_live",
-							"name": "居住推估人數"
-						},
-						{
-							"key": "pop_work",
-							"name": "工作推估人數"
-						}
+
 					],
 					"type": "fill",
 					"size": null,
 					"icon": null,
-					"title": "居職人口推估"
-
+					"title": "四站公車覆蓋範圍"
 				},
 				{
 					"index": "_poc_poly3",
 					"paint": {
-						"fill-color": "green"
+						"fill-color": "#A0E9FF"
+					},
+					"property": [
+
+					],
+					"type": "fill",
+					"size": null,
+					"icon": null,
+					"title": "三站公車覆蓋範圍"
+
+				},
+				{
+					"index": "_poc_poly2",
+					"paint": {
+						"fill-color": "#89CFF3"
 					},
 					"property": [
 						{
@@ -4751,9 +4793,24 @@
 					"type": "fill",
 					"size": null,
 					"icon": null,
-					"title": "居職人口推估"
+					"title": "二站公車覆蓋範圍"
 
+				},
+				{
+					"index": "_poc_poly1",
+					"paint": {
+						"fill-color": "#00A9FF"
+					},
+					"property": [
+
+					],
+					"type": "fill",
+					"size": null,
+					"icon": null,
+					"title": "一站公車覆蓋範圍"
 				}
+
+
 			],
 			"source": "資訊局",
 			"time_from": "2023-07-01T00:00:00+08:00",
