@@ -4111,10 +4111,7 @@
 				"color": ["#58B836"],
 				"types": ["ColumnChart", "DistrictChart", "RadarChart"],
 				"unit": "個",
-				"map_filter": [
-					"facilities_cnt_",
-					["0-2", "3-5", "5up"]
-				]
+				"map_filter": ["facilities_cnt_", ["0-2", "3-5", "5up"]]
 			},
 			"name": "共融式遊戲場",
 			"source": "社會局",
@@ -4157,16 +4154,13 @@
 						"color": "#f75d52"
 					}
 				],
-				"map_filter": [
-					"danger",
-					[
-						2.0,
-						3.0,
-						4.0,
-						5.0
-					]
-				]
-
+				"labels": {
+					"x1": "人口少",
+					"x2": "人口多",
+					"y1": "車禍多",
+					"y2": "車禍少"
+				},
+				"map_filter": ["danger", [2.0, 3.0, 4.0, 5.0]]
 			},
 			"map_config": [
 				{
@@ -4311,10 +4305,13 @@
 						"name": "建議開車"
 					}
 				],
-				"map_filter": [
-					"quad_x",
-					[1, 2, 3, 4]
-				]
+				"labels": {
+					"x1": "停車位多",
+					"x2": "停車位少",
+					"y1": "捷運站遠",
+					"y2": "近捷運站"
+				},
+				"map_filter": ["quad_x", [1, 2, 3, 4]]
 			},
 			"map_config": [
 				{
@@ -4336,7 +4333,6 @@
 							"name": "婦幼友善車位"
 						}
 					]
-
 				},
 				{
 					"title": "鄰近停車位",
@@ -4360,7 +4356,6 @@
 					"paint": {
 						"line-color": "white",
 						"line-width": 4
-
 					},
 					"property": [
 						{
@@ -4465,11 +4460,8 @@
 					"index": "_poc_poly4",
 					"paint": {
 						"fill-color": "#CDF5FD"
-
 					},
-					"property": [
-
-					],
+					"property": [],
 					"type": "fill",
 					"size": null,
 					"icon": null,
@@ -4480,44 +4472,34 @@
 					"paint": {
 						"fill-color": "#A0E9FF"
 					},
-					"property": [
-
-					],
+					"property": [],
 					"type": "fill",
 					"size": null,
 					"icon": null,
 					"title": "三站公車覆蓋範圍"
-
 				},
 				{
 					"index": "_poc_poly2",
 					"paint": {
 						"fill-color": "#89CFF3"
 					},
-					"property": [
-
-					],
+					"property": [],
 					"type": "fill",
 					"size": null,
 					"icon": null,
 					"title": "二站公車覆蓋範圍"
-
 				},
 				{
 					"index": "_poc_poly1",
 					"paint": {
 						"fill-color": "#00A9FF"
 					},
-					"property": [
-
-					],
+					"property": [],
 					"type": "fill",
 					"size": null,
 					"icon": null,
 					"title": "一站公車覆蓋範圍"
 				}
-
-
 			],
 			"name": "親子館",
 			"source": "臺北大數據中心",
@@ -4554,7 +4536,13 @@
 					{
 						"name": "多但小"
 					}
-				]
+				],
+				"labels": {
+					"x1": "遊戲場少",
+					"x2": "遊戲場多",
+					"y1": "平均設施少",
+					"y2": "平均設施多"
+				}
 			},
 			"map_config": [
 				{
@@ -4614,7 +4602,6 @@
 							"name": "婦幼友善車位"
 						}
 					]
-
 				},
 				{
 					"title": "鄰近停車位",
@@ -4638,7 +4625,6 @@
 					"paint": {
 						"line-color": "white",
 						"line-width": 4
-
 					},
 					"property": [
 						{
@@ -4691,16 +4677,8 @@
 			"chart_config": {
 				"types": ["TreemapChart", "BarChart"],
 				"unit": "個網格",
-				"color": [
-					"#7FBF7B",
-					"#8E8E8E",
-					"#40A461",
-					"#BEBEBE"
-				],
-				"map_filter": [
-					"quad_x",
-					[1, 2, 3, 4]
-				]
+				"color": ["#7FBF7B", "#8E8E8E", "#40A461", "#BEBEBE"],
+				"map_filter": ["quad_x", [1, 2, 3, 4]]
 			},
 			"chart_data": [
 				{
@@ -4733,15 +4711,7 @@
 					"#faa307",
 					"#ffba08"
 				],
-				"map_filter": [
-					"danger",
-					[
-						2.0,
-						3.0,
-						4.0,
-						5.0
-					]
-				]
+				"map_filter": ["danger", [2.0, 3.0, 4.0, 5.0]]
 			},
 			"map_config": [
 				{
@@ -4821,7 +4791,6 @@
 			"id": 1005,
 			"index": "_playgroundFac",
 
-
 			"chart_config": {
 				"types": ["BarChart"],
 				"unit": "個",
@@ -4834,10 +4803,7 @@
 					"#BFDAB8",
 					"#ACCFFF"
 				],
-				"map_filter": [
-					"facilities_cnt_",
-					["0-2", "3-5", "5up"]
-				]
+				"map_filter": ["facilities_cnt_", ["0-2", "3-5", "5up"]]
 			},
 			"map_config": [
 				{
@@ -4886,10 +4852,7 @@
 					"#BFDAB8",
 					"#ACCFFF"
 				],
-				"map_filter": [
-					"ppl",
-					[0, 1]
-				]
+				"map_filter": ["ppl", [0, 1]]
 			},
 			"map_config": [
 				{
@@ -4916,11 +4879,8 @@
 					"index": "_poc_poly4",
 					"paint": {
 						"fill-color": "#CDF5FD"
-
 					},
-					"property": [
-
-					],
+					"property": [],
 					"type": "fill",
 					"size": null,
 					"icon": null,
@@ -4931,14 +4891,11 @@
 					"paint": {
 						"fill-color": "#A0E9FF"
 					},
-					"property": [
-
-					],
+					"property": [],
 					"type": "fill",
 					"size": null,
 					"icon": null,
 					"title": "三站公車覆蓋範圍"
-
 				},
 				{
 					"index": "_poc_poly2",
@@ -4959,23 +4916,18 @@
 					"size": null,
 					"icon": null,
 					"title": "二站公車覆蓋範圍"
-
 				},
 				{
 					"index": "_poc_poly1",
 					"paint": {
 						"fill-color": "#00A9FF"
 					},
-					"property": [
-
-					],
+					"property": [],
 					"type": "fill",
 					"size": null,
 					"icon": null,
 					"title": "一站公車覆蓋範圍"
 				}
-
-
 			],
 			"source": "資訊局",
 			"time_from": "2023-07-01T00:00:00+08:00",
