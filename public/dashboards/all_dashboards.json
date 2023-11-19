@@ -1,12 +1,6 @@
 {
 	"data": [
 		{
-			"name": "祝你好孕",
-			"index": "good-pregnant",
-			"components": ["307", "306", "305", "301", "302", "303", "304"],
-			"icon": "pregnant_woman"
-		},
-		{
 			"name": "YouBike研究",
 			"index": "youbike",
 			"components": ["60", "142", "143", "144", "145", "146", "147"],
@@ -62,9 +56,9 @@
 		},
 		{
 			"name": "祝你好孕",
-			"index": "wishYouPregnant",
-			"components": ["1003", "1004", "1005", "1006"],
-			"icon": "favorite"
+			"index": "good-pregnant",
+			"components": ["307", "306", "305", "301", "302", "303", "304"],
+			"icon": "pregnant_woman"
 		},
 		{
 			"name": "圖資資訊",
@@ -82,10 +76,13 @@
 				"16",
 				"30",
 				"106",
-				"1003",
-				"1004",
-				"1005",
-				"1006"
+				"301",
+				"302",
+				"303",
+				"304",
+				"305",
+				"306",
+				"307"
 			],
 			"icon": "public"
 		}
