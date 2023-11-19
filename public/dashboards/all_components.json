@@ -4495,14 +4495,7 @@
 						"fill-color": "#89CFF3"
 					},
 					"property": [
-						{
-							"key": "pop_live",
-							"name": "居住推估人數"
-						},
-						{
-							"key": "pop_work",
-							"name": "工作推估人數"
-						}
+
 					],
 					"type": "fill",
 					"size": null,
@@ -4534,6 +4527,66 @@
 			"long_desc": "除了展示週末全市YouBike的行政區起訖交易數量，可查閱地圖資料顯示詳細的起迄站點分佈(為避免雜訊影響閱讀，只顯示月交易量>35次的起訖)。資料來源為臺北大數據中心研究，更新頻率為不定期。",
 			"use_case": "透過本組件的起訖分佈，您可以發現使用者在週末如何透過YouBike移動，對於規劃大眾運輸與最後一哩路有相當幫助。",
 			"links": null,
+			"tags": [],
+			"contributors": ["tuic"]
+		},
+		"308": {
+			"id": 308,
+			"index": "inclusive_playground",
+			"chart_config": {
+				"types": ["FourQuadrantChart"],
+				"xaxisLabel": "遊戲場數量",
+				"yaxisLabel": "平均設施數量",
+				"xaxisUnit": "個",
+				"yaxisUnit": "個",
+				"backgrounds": [
+					{
+						"name": "少而美",
+						"color": "#f5c489"
+					},
+					{
+						"name": "遊戲天堂"
+					},
+					{
+						"name": "展望未來",
+						"color": "#f75d52"
+					},
+					{
+						"name": "多但小"
+					}
+				]
+			},
+			"map_config": [
+				{
+					"title": "共融中心",
+					"index": "_playground",
+					"type": "symbol",
+					"property": [
+						{
+							"key": "name",
+							"name": "名稱"
+						},
+						{
+							"key": "facilities",
+							"name": "設施"
+						}
+					],
+					"icon": "parent_blue"
+				}
+			],
+			"name": "共融遊戲場",
+			"source": "社會局",
+			"history_data": false,
+			"time_from": null,
+			"time_to": null,
+			"update_freq": null,
+			"update_freq_unit": null,
+			"short_desc": "// todo 顯示緊急救護的上月統計資訊",
+			"long_desc": "// todo顯示緊急救護的上月統計資訊，資料來源為台北市消防局內部資料，每月更新。",
+			"use_case": "// todo瞭解緊急救護服務案件的統計資訊，有助於優化救護服務的配置及應急措施。",
+			"links": [
+				"https://data.taipei/dataset/detail?id=2704f07d-4d1d-4cef-b53a-c44aef326d96"
+			],
 			"tags": [],
 			"contributors": ["tuic"]
 		},
@@ -4933,66 +4986,6 @@
 			"links": [
 				"https://tuic.gov.taipei/youbike",
 				"https://github.com/tpe-doit/YouBike-Optimization"
-			],
-			"tags": [],
-			"contributors": ["tuic"]
-		},
-		"308": {
-			"id": 308,
-			"index": "inclusive_playground",
-			"chart_config": {
-				"types": ["FourQuadrantChart"],
-				"xaxisLabel": "遊戲場數量",
-				"yaxisLabel": "平均設施數量",
-				"xaxisUnit": "個",
-				"yaxisUnit": "個",
-				"backgrounds": [
-					{
-						"name": "少而美",
-						"color": "#f5c489"
-					},
-					{
-						"name": "遊戲天堂"
-					},
-					{
-						"name": "展望未來",
-						"color": "#f75d52"
-					},
-					{
-						"name": "多但小"
-					}
-				]
-			},
-			"map_config": [
-				{
-					"title": "共融中心",
-					"index": "_playground",
-					"type": "symbol",
-					"property": [
-						{
-							"key": "name",
-							"name": "名稱"
-						},
-						{
-							"key": "facilities",
-							"name": "設施"
-						}
-					],
-					"icon": "parent_blue"
-				}
-			],
-			"name": "共融遊戲場",
-			"source": "社會局",
-			"history_data": false,
-			"time_from": null,
-			"time_to": null,
-			"update_freq": null,
-			"update_freq_unit": null,
-			"short_desc": "// todo 顯示緊急救護的上月統計資訊",
-			"long_desc": "// todo顯示緊急救護的上月統計資訊，資料來源為台北市消防局內部資料，每月更新。",
-			"use_case": "// todo瞭解緊急救護服務案件的統計資訊，有助於優化救護服務的配置及應急措施。",
-			"links": [
-				"https://data.taipei/dataset/detail?id=2704f07d-4d1d-4cef-b53a-c44aef326d96"
 			],
 			"tags": [],
 			"contributors": ["tuic"]
