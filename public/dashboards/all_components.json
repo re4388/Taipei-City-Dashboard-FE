@@ -4087,20 +4087,20 @@
 				"types": ["DistrictChart", "RadarChart", "ColumnChart"],
 				"unit": "人"
 			},
-			"name": "各行政區 0~6 歲人口數量",
+			"name": "臺北市0~6歲人口分布",
 			"source": "民政局",
 			"history_data": true,
-			"time_from": "2022-01-01T14:50:55+08:00",
-			"time_to": "2023-10-01T00:00:00+08:00",
+			"time_from": "2011-01-01T00:00:00+08:00",
+			"time_to": "2023-09-30T00:00:00+08:00",
 			"update_freq": 1,
 			"update_freq_unit": "month",
-			"short_desc": "// todo 顯示緊急救護的上月統計資訊",
-			"long_desc": "// todo顯示緊急救護的上月統計資訊，資料來源為台北市消防局內部資料，每月更新。",
-			"use_case": "// todo瞭解緊急救護服務案件的統計資訊，有助於優化救護服務的配置及應急措施。",
-			"links": null,
-			"tags": [
-				"https://data.taipei/dataset/detail?id=64c8a3a0-3b9a-4f49-a13a-fb1eb2ffa4b1"
+			"short_desc": "臺北市0~6歲人口分布",
+			"long_desc": "本組件展示幼年人口在臺北市的分布情形及人口數量統計。",
+			"use_case": "透過本組件鮮明的顏色，以視覺化快速了解人口分布，並清楚標示各行政區的幼年人口數量。",
+			"links": [
+				"https://data.taipei/dataset/detail?id=a5299a5e-0a08-49b8-8925-a28dd422393e"
 			],
+			"tags": [],
 			"contributors": ["tuic"]
 		},
 		"302": {
@@ -4113,16 +4113,16 @@
 				"unit": "個",
 				"map_filter": ["facilities_cnt_", ["0-2", "3-5", "5up"]]
 			},
-			"name": "共融式遊戲場",
+			"name": "行政區：共融遊戲場分布",
 			"source": "社會局",
 			"history_data": false,
-			"time_from": "2022-01-01T14:50:55+08:00",
-			"time_to": "2023-10-01T00:00:00+08:00",
+			"time_from": "2023-10-11T00:00:00+08:00",
+			"time_to": null,
 			"update_freq": 1,
 			"update_freq_unit": "month",
-			"short_desc": "// todo 顯示緊急救護的上月統計資訊",
-			"long_desc": "// todo顯示緊急救護的上月統計資訊，資料來源為台北市消防局內部資料，每月更新。",
-			"use_case": "// todo瞭解緊急救護服務案件的統計資訊，有助於優化救護服務的配置及應急措施。",
+			"short_desc": "行政區：共融遊戲場分布",
+			"long_desc": "顯示台北市在不同行政區共融遊戲場的遊戲設施多寡",
+			"use_case": "重視共融遊戲場的爸爸媽媽，可以清楚知道不同行政區的共融遊戲設施的情況。而相關政府機關也可以了解哪邊是可以著力的點。",
 			"links": null,
 			"tags": [
 				"https://data.taipei/dataset/detail?id=2704f07d-4d1d-4cef-b53a-c44aef326d96"
@@ -4159,39 +4159,9 @@
 					"x2": "人口多",
 					"y1": "車禍多",
 					"y2": "車禍少"
-				},
-				"map_filter": ["danger", [2.0, 3.0, 4.0, 5.0]]
+				}
 			},
 			"map_config": [
-				{
-					"title": "親子館",
-					"index": "_parentPoint",
-					"type": "symbol",
-					"property": [
-						{
-							"key": "name",
-							"name": "名稱"
-						},
-						{
-							"key": "address",
-							"name": "地址"
-						},
-						{
-							"key": "phone",
-							"name": "電話"
-						}
-					],
-					"icon": "parent_0"
-				},
-				{
-					"title": "交通危險程度",
-					"index": "_districtPoly",
-					"type": "line",
-					"paint": {
-						"line-color": "white",
-						"line-width": 3
-					}
-				},
 				{
 					"title": "交通危險程度",
 					"index": "_timDanger",
@@ -4220,19 +4190,50 @@
 							"name": "危險程度"
 						}
 					]
+				},
+				{
+					"title": "親子館",
+					"index": "_parentPoint",
+					"type": "symbol",
+					"property": [
+						{
+							"key": "name",
+							"name": "名稱"
+						},
+						{
+							"key": "address",
+							"name": "地址"
+						},
+						{
+							"key": "phone",
+							"name": "電話"
+						}
+					],
+					"icon": "parent_0"
+				},
+				{
+					"title": "交通危險程度",
+					"index": "_districtPoly",
+					"type": "line",
+					"paint": {
+						"line-color": "white",
+						"line-width": 3
+					}
 				}
 			],
-			"name": "安全之路",
+			"name": "行政區：幼年人口v.s.行車安全",
 			"source": "衛生福利部社會及家庭署",
 			"history_data": false,
-			"time_from": null,
-			"time_to": null,
+			"time_from": "2021-01-07T00:00:00+08:00",
+			"time_to": "2023-11-14T00:00:00+08:00",
 			"update_freq": null,
 			"update_freq_unit": null,
-			"short_desc": "// todo 顯示緊急救護的上月統計資訊",
-			"long_desc": "// todo顯示緊急救護的上月統計資訊，資料來源為台北市消防局內部資料，每月更新。",
-			"use_case": "// todo瞭解緊急救護服務案件的統計資訊，有助於優化救護服務的配置及應急措施。",
-			"links": null,
+			"short_desc": "行政區：幼年人口v.s.行車安全",
+			"long_desc": "本組件透過四象限圖對比各行政區的幼年人口和事故發生數量，以便快速辨識哪些行政區在幼兒成長過程中相對較為安全。",
+			"use_case": "透過x軸:幼年人口，y軸: 事故數量(A1,A2)，區分出四個象限。\n分別為：\n\"\"第I象限\"\": 幼年人口數多，事故少。\n\"\"第II象限\"\": 幼年人口數少，事故少。\n\"\"第III象限\"\": 幼年人口數少，事故多。\n\"\"第IV象限\"\": 幼年人口數多，事故多。",
+			"links": [
+				"https://data.gov.tw/dataset/136123, https://data.taipei/dataset/detail?id=a5299a5e-0a08-49b8-8925-a28dd422393e"
+			],
 			"tags": [],
 			"contributors": ["tuic"]
 		},
@@ -4245,17 +4246,17 @@
 				"types": ["RadarChart", "DistrictChart", "ColumnChart"],
 				"unit": "個"
 			},
-			"name": "交通事故",
-			"source": "民政局",
+			"name": "行政區：A1+A2車禍次數",
+			"source": "警察局交通大隊",
 			"history_data": true,
-			"time_from": "2022-01-01T14:50:55+08:00",
-			"time_to": "2023-10-01T00:00:00+08:00",
+			"time_from": "2021-01-07T00:00:00+08:00",
+			"time_to": "2023-11-14T00:00:00+08:00",
 			"update_freq": 1,
-			"update_freq_unit": "month",
-			"short_desc": "// todo 顯示緊急救護的上月統計資訊",
-			"long_desc": "// todo顯示緊急救護的上月統計資訊，資料來源為台北市消防局內部資料，每月更新。",
-			"use_case": "// todo瞭解緊急救護服務案件的統計資訊，有助於優化救護服務的配置及應急措施。",
-			"links": null,
+			"update_freq_unit": "year",
+			"short_desc": "行政區：A1+A2事故",
+			"long_desc": "本組件件可以顯示各行政區的交通事故數據，並且可以更清晰地了解各區域交通事故的歷年趨勢，進一步辨識事故高發的行政區。",
+			"use_case": "透過這個組件，我們可以識別出事故高發的行政區，進而分析問題並制定解決方案，以達到預防事故發生的效果。",
+			"links": ["https://data.gov.tw/dataset/136123"],
 			"tags": [],
 			"contributors": ["tuic"]
 		},
@@ -4269,14 +4270,16 @@
 				"yMax": 17000,
 				"yMin": -4000
 			},
-			"name": "車禍_幼年人口",
+			"name": "A1+A2車禍次數v.s.幼年人口數量",
 			"source": "警察局交通大隊&民政局",
-			"time_from": "2023-07-28T00:00:00+08:00",
+			"time_from": null,
 			"time_to": null,
-			"short_desc": "",
-			"long_desc": "展示YouBike未設站區的潛在用車需求，這些資訊基於大數據中心研究提供，詳細預測方法可參考開源成果Github，更新頻率不定期。",
-			"use_case": "YouBike未設站區潛在需求將協助您了解未來可能需要增設YouBike站點的地區。這有助於規劃YouBike的擴展和改進，以滿足日益增長的需求。",
-			"links": null,
+			"short_desc": "A1+A2車禍次v.s.幼年人口數量",
+			"long_desc": "以行政區各別統計，顯示嚴重車禍次數與幼年人口數量的今、去年增長幅度，右邊綠色直條圖表示幼年人口統計，左邊藍色直條圖表示A1和A2車禍次數統計，橘色標籤為該項去年資料。",
+			"use_case": "藉由掌握臺北市車禍事故案件及幼年人口近2年的統計資訊，我們可以瞭解行政區的增減趨勢及相關特徵，有助於制定更有效的交通安全策略與增設無障礙設施。",
+			"links": [
+				"https://data.gov.tw/dataset/136123, https://data.taipei/dataset/detail?id=a5299a5e-0a08-49b8-8925-a28dd422393e"
+			],
 			"tags": [],
 			"contributors": ["tuic"]
 		},
@@ -4311,7 +4314,7 @@
 					"y1": "捷運站遠",
 					"y2": "近捷運站"
 				},
-				"map_filter": ["quad_x", [1, 2, 3, 4]]
+				"map_filter": ["quad_x", [2, 1, 3, 4]]
 			},
 			"map_config": [
 				{
@@ -4405,17 +4408,19 @@
 					"icon": "metro"
 				}
 			],
-			"name": "車位數_捷運站距離",
-			"source": "衛生福利部社會及家庭署",
+			"name": "親子館：開車還是搭捷運？",
+			"source": "臺北大數據中心",
 			"history_data": false,
-			"time_from": null,
-			"time_to": null,
+			"time_from": "2012-01-09T00:00:00+08:00",
+			"time_to": "2023-11-14T00:00:00+08:00",
 			"update_freq": null,
 			"update_freq_unit": null,
-			"short_desc": "// todo 顯示緊急救護的上月統計資訊",
-			"long_desc": "// todo顯示緊急救護的上月統計資訊，資料來源為台北市消防局內部資料，每月更新。",
-			"use_case": "// todo瞭解緊急救護服務案件的統計資訊，有助於優化救護服務的配置及應急措施。",
-			"links": null,
+			"short_desc": "親子館：開車還是搭捷運？",
+			"long_desc": "本組件x軸表示親子館五百公尺內的停車場車位總數(離原點越遠，車位數月多)，y軸表示距離捷運站的距離(離原點越遠，離捷運站越近)，散布點表示各行政區的親子館。",
+			"use_case": "透過x軸:車位由少到多，y軸: 距捷運站由遠到近，區分出四個象限。\n分別為：\n\"\"第I象限\"\": 交通最方便，捷運開車都非常適合。\n\"\"第II象限\"\": 搭捷運方便，但附近停車位相對較少。\n\"\"第III象限\"\": 交通不便，離捷運站遠、車位也很少。\n\"\"第IV象限\"\": 建議開車前往，車位多、離捷運站遠。",
+			"links": [
+				"https://data.gov.tw/dataset/128435,https://data.taipei/dataset/detail?id=cfa4778c-62c1-497b-b704-756231de348b"
+			],
 			"tags": [],
 			"contributors": ["tuic"]
 		},
@@ -4501,15 +4506,19 @@
 					"title": "一站公車覆蓋範圍"
 				}
 			],
-			"name": "親子館",
+			"name": "親子館：交通健檢",
 			"source": "臺北大數據中心",
-			"time_from": "2023-07-28T00:00:00+08:00",
+			"time_from": null,
 			"time_to": null,
-			"short_desc": "",
-			"long_desc": "除了展示週末全市YouBike的行政區起訖交易數量，可查閱地圖資料顯示詳細的起迄站點分佈(為避免雜訊影響閱讀，只顯示月交易量>35次的起訖)。資料來源為臺北大數據中心研究，更新頻率為不定期。",
-			"use_case": "透過本組件的起訖分佈，您可以發現使用者在週末如何透過YouBike移動，對於規劃大眾運輸與最後一哩路有相當幫助。",
+			"short_desc": "親子館：交通健檢",
+			"long_desc": "交通方便度紅綠燈，綠色表示方便、紅色表示不方便。\n最近MRT距離: 親子館離最近的捷運站的距離。\n停車位數: 親子館方圓五百公尺內的停車場之車位數總和。\n公車站一站範圍: 搭持無障礙公車，能夠一站就抵達親子館的站牌涵蓋的服務範圍(每個站牌方圓兩百公尺），範圍越大表示能方便抵達親子館的範圍越大。\n公車站兩站範圍: 同上，但改為搭兩站就能抵達。\n公車站三站範圍: 同上，但改為搭三站就能抵達。",
+			"use_case": "從搭乘捷運、自行開車、搭乘公車三個維度觀察親子館的交通便利程度。\n例如，可以透過三個維度的組合決定如何前往特定親子館。或是思考潛在的交通改善方案。",
 			"links": null,
-			"tags": [],
+			"tags": [
+				"https://data.gov.tw/dataset/128435",
+				"https://data.taipei/dataset/detail?id=cfa4778c-62c1-497b-b704-756231de348b",
+				"https://data.gov.tw/dataset/128435"
+			],
 			"contributors": ["tuic"]
 		},
 		"308": {
@@ -4562,382 +4571,18 @@
 					"icon": "parent_blue"
 				}
 			],
-			"name": "共融遊戲場",
+			"name": "行政區：共融遊戲場數量v.s.設施數量",
 			"source": "社會局",
 			"history_data": false,
-			"time_from": null,
+			"time_from": "2023-10-11T00:00:00+08:00",
 			"time_to": null,
 			"update_freq": null,
 			"update_freq_unit": null,
-			"short_desc": "// todo 顯示緊急救護的上月統計資訊",
-			"long_desc": "// todo顯示緊急救護的上月統計資訊，資料來源為台北市消防局內部資料，每月更新。",
-			"use_case": "// todo瞭解緊急救護服務案件的統計資訊，有助於優化救護服務的配置及應急措施。",
+			"short_desc": "行政區：共融遊戲場數量v.s.設施數量",
+			"long_desc": "顯示台北市在不同行政區共融遊戲場的遊戲設施多寡。透過四象限圖，x軸表示該行政區的遊戲場數量，y軸表示該行政區平均設施數量，我們可以清楚的知道那些區域的較多的共融遊戲場數量和相對較多的設施數量，也可以提供相關機關在設立共融遊戲數量上的區域選擇。",
+			"use_case": "重視共融遊戲場的爸爸媽媽，可以清楚知道不同行政區的共融遊戲設施的情況。而相關政府機關也可以了解哪邊是可以著力的點。",
 			"links": [
 				"https://data.taipei/dataset/detail?id=2704f07d-4d1d-4cef-b53a-c44aef326d96"
-			],
-			"tags": [],
-			"contributors": ["tuic"]
-		},
-		"1003": {
-			"name": "親子館與捷運站",
-			"id": 1003,
-			"index": "parentMrtMap",
-			"map_config": [
-				{
-					"title": "停車場",
-					"type": "circle",
-					"index": "_nearByParkPoint",
-					"paint": {
-						"circle-stroke-color": "blue",
-						"circle-opacity": 0,
-						"circle-stroke-width": 1.5
-					},
-					"property": [
-						{
-							"key": "summary",
-							"name": "summary"
-						},
-						{
-							"key": "Pregnancy_First",
-							"name": "婦幼友善車位"
-						}
-					]
-				},
-				{
-					"title": "鄰近停車位",
-					"index": "_parentCircle",
-					"type": "fill",
-					"paint": {
-						"fill-color": "#b4f71c",
-						"fill-outline-color": "#FAB733"
-					},
-					"property": [
-						{
-							"key": "total",
-							"name": "停車位總和"
-						}
-					]
-				},
-				{
-					"title": "親子館共融中心到MRT",
-					"type": "line",
-					"index": "_parentToMRTLine",
-					"paint": {
-						"line-color": "white",
-						"line-width": 4
-					},
-					"property": [
-						{
-							"key": "distance",
-							"name": "距離(m)"
-						}
-					]
-				},
-				{
-					"title": "親子館",
-					"type": "symbol",
-					"index": "_parentPoint",
-					"property": [
-						{
-							"key": "name",
-							"name": "名稱"
-						},
-						{
-							"key": "address",
-							"name": "地址"
-						},
-						{
-							"key": "phone",
-							"name": "電話"
-						}
-					],
-					"icon": "parent_0"
-				},
-				{
-					"title": "MRT",
-					"type": "symbol",
-					"index": "_parentMRT",
-					"property": [
-						{
-							"key": "name",
-							"name": "捷運站名"
-						},
-						{
-							"key": "exit_name",
-							"name": "出站口"
-						},
-						{
-							"key": "distance",
-							"name": "距離(m)"
-						}
-					],
-					"icon": "metro"
-				}
-			],
-			"chart_config": {
-				"types": ["TreemapChart", "BarChart"],
-				"unit": "個網格",
-				"color": ["#7FBF7B", "#8E8E8E", "#40A461", "#BEBEBE"],
-				"map_filter": ["quad_x", [1, 2, 3, 4]]
-			},
-			"chart_data": [
-				{
-					"type": "circle",
-					"color": "#8bc34a",
-					"name": "避難場所",
-					"value": 298
-				}
-			],
-			"source": "xxxxxxxxx",
-			"time_from": null,
-			"time_to": null,
-			"update_freq": null,
-			"update_freq_unit": null,
-			"contributors": ["tuic"]
-		},
-		"1004": {
-			"name": "親子意外風險區域",
-			"id": 1004,
-			"index": "timDanger",
-			"chart_config": {
-				"types": ["TreemapChart", "BarChart"],
-				"unit": "個網格",
-				"color": [
-					"#9d0208",
-					"#d00000",
-					"#dc2f02",
-					"#e85d04",
-					"#f48c06",
-					"#faa307",
-					"#ffba08"
-				],
-				"map_filter": ["danger", [2.0, 3.0, 4.0, 5.0]]
-			},
-			"map_config": [
-				{
-					"title": "親子館",
-					"index": "_parentPoint",
-					"type": "symbol",
-					"property": [
-						{
-							"key": "name",
-							"name": "名稱"
-						},
-						{
-							"key": "address",
-							"name": "地址"
-						},
-						{
-							"key": "phone",
-							"name": "電話"
-						}
-					],
-					"icon": "parent_0"
-				},
-				{
-					"title": "交通危險程度",
-					"index": "_districtPoly",
-					"type": "line",
-					"paint": {
-						"line-color": "white",
-						"line-width": 3
-					}
-				},
-				{
-					"title": "交通危險程度",
-					"index": "_timDanger",
-					"type": "fill",
-					"paint": {
-						"fill-color": [
-							"case",
-							["==", ["get", "danger"], 1],
-							"#ACB334",
-							["==", ["get", "danger"], 2],
-							"#FAB733",
-							["==", ["get", "danger"], 3],
-							"#FF8E15",
-							["==", ["get", "danger"], 4],
-							"#FF4E11",
-							["==", ["get", "danger"], 5],
-							"#FF1E00",
-							"#0F0F0F"
-						],
-						"fill-opacity": 0.6,
-						"fill-outline-color": "#555555"
-					},
-					"property": [
-						{
-							"key": "danger",
-							"name": "危險程度"
-						}
-					]
-				}
-			],
-			"source": "資訊局",
-			"time_from": "2023-07-01T00:00:00+08:00",
-			"time_to": null,
-			"short_desc": "",
-			"long_desc": "將全市用250見方的網格表示，依據各網格條件分為可設站及無法設站。可設站網格包含已設站、未設站及鄰近已設站。無法設站網格的類型包含山區、土地限制及特殊條件。土地限制為根據國土利用現況調查結果不適合開發之區域，特殊條件為軍方用地或無設站空間。資料來源為大數據中心研究，更新頻率不定期。",
-			"use_case": "本組件可讓您快速查看各區域的YouBike設站情況。了解哪些區域已提供YouBike服務?哪些因為土地或地形限制無法設站?哪些地區目前未設站但具有設站潛能。",
-			"links": [
-				"https://tuic.gov.taipei/youbike",
-				"https://github.com/tpe-doit/YouBike-Optimization"
-			],
-			"tags": [],
-			"contributors": ["tuic"]
-		},
-		"1005": {
-			"name": "共融遊戲場",
-			"id": 1005,
-			"index": "_playgroundFac",
-
-			"chart_config": {
-				"types": ["BarChart"],
-				"unit": "個",
-				"color": [
-					"#7FBF7B",
-					"#8E8E8E",
-					"#40A461",
-					"#BEBEBE",
-					"#3D56FF",
-					"#BFDAB8",
-					"#ACCFFF"
-				],
-				"map_filter": ["facilities_cnt_", ["0-2", "3-5", "5up"]]
-			},
-			"map_config": [
-				{
-					"title": "共融中心",
-					"index": "_playground",
-					"type": "symbol",
-					"property": [
-						{
-							"key": "name",
-							"name": "名稱"
-						},
-						{
-							"key": "facilities",
-							"name": "設施"
-						}
-					],
-					"icon": "parent_blue"
-				}
-			],
-			"source": "資訊局",
-			"time_from": "2023-07-01T00:00:00+08:00",
-			"time_to": null,
-			"short_desc": "",
-			"long_desc": "將全市用250見方的網格表示，依據各網格條件分為可設站及無法設站。可設站網格包含已設站、未設站及鄰近已設站。無法設站網格的類型包含山區、土地限制及特殊條件。土地限制為根據國土利用現況調查結果不適合開發之區域，特殊條件為軍方用地或無設站空間。資料來源為大數據中心研究，更新頻率不定期。",
-			"use_case": "本組件可讓您快速查看各區域的YouBike設站情況。了解哪些區域已提供YouBike服務?哪些因為土地或地形限制無法設站?哪些地區目前未設站但具有設站潛能。",
-			"links": [
-				"https://tuic.gov.taipei/youbike",
-				"https://github.com/tpe-doit/YouBike-Optimization"
-			],
-			"tags": [],
-			"contributors": ["tuic"]
-		},
-		"1006": {
-			"name": "等高線公車距離",
-			"id": 1006,
-			"index": "busDist",
-			"chart_config": {
-				"types": ["TreemapChart", "BarChart"],
-				"unit": "個網格",
-				"color": [
-					"#7FBF7B",
-					"#8E8E8E",
-					"#40A461",
-					"#BEBEBE",
-					"#3D56FF",
-					"#BFDAB8",
-					"#ACCFFF"
-				],
-				"map_filter": ["ppl", [0, 1]]
-			},
-			"map_config": [
-				{
-					"type": "symbol",
-					"index": "_parentPoint",
-					"property": [
-						{
-							"key": "name",
-							"name": "名稱"
-						},
-						{
-							"key": "address",
-							"name": "地址"
-						},
-						{
-							"key": "phone",
-							"name": "電話"
-						}
-					],
-					"icon": "parent_0",
-					"title": "親子館"
-				},
-				{
-					"index": "_poc_poly4",
-					"paint": {
-						"fill-color": "#CDF5FD"
-					},
-					"property": [],
-					"type": "fill",
-					"size": null,
-					"icon": null,
-					"title": "四站公車覆蓋範圍"
-				},
-				{
-					"index": "_poc_poly3",
-					"paint": {
-						"fill-color": "#A0E9FF"
-					},
-					"property": [],
-					"type": "fill",
-					"size": null,
-					"icon": null,
-					"title": "三站公車覆蓋範圍"
-				},
-				{
-					"index": "_poc_poly2",
-					"paint": {
-						"fill-color": "#89CFF3"
-					},
-					"property": [
-						{
-							"key": "pop_live",
-							"name": "居住推估人數"
-						},
-						{
-							"key": "pop_work",
-							"name": "工作推估人數"
-						}
-					],
-					"type": "fill",
-					"size": null,
-					"icon": null,
-					"title": "二站公車覆蓋範圍"
-				},
-				{
-					"index": "_poc_poly1",
-					"paint": {
-						"fill-color": "#00A9FF"
-					},
-					"property": [],
-					"type": "fill",
-					"size": null,
-					"icon": null,
-					"title": "一站公車覆蓋範圍"
-				}
-			],
-			"source": "資訊局",
-			"time_from": "2023-07-01T00:00:00+08:00",
-			"time_to": null,
-			"short_desc": "",
-			"long_desc": "將全市用250見方的網格表示，依據各網格條件分為可設站及無法設站。可設站網格包含已設站、未設站及鄰近已設站。無法設站網格的類型包含山區、土地限制及特殊條件。土地限制為根據國土利用現況調查結果不適合開發之區域，特殊條件為軍方用地或無設站空間。資料來源為大數據中心研究，更新頻率不定期。",
-			"use_case": "本組件可讓您快速查看各區域的YouBike設站情況。了解哪些區域已提供YouBike服務?哪些因為土地或地形限制無法設站?哪些地區目前未設站但具有設站潛能。",
-			"links": [
-				"https://tuic.gov.taipei/youbike",
-				"https://github.com/tpe-doit/YouBike-Optimization"
 			],
 			"tags": [],
 			"contributors": ["tuic"]

@@ -2,6 +2,7 @@
 
 <script setup>
 import { ref, computed, onMounted, nextTick } from "vue";
+import { useMapStore } from "../../store/mapStore";
 
 const hexToRgba = (hex, opacity) => {
 	const hexColor = hex.replace("#", "");
@@ -47,8 +48,11 @@ const props = defineProps([
 	"series",
 	"map_config",
 ]);
+const mapStore = useMapStore();
 
 const chartRef = ref(null);
+
+const lastClickedQuadrant = ref(null);
 
 const backgroundSettings = computed(() => {
 	return props.chart_config.backgrounds.map((item, index) => {
@@ -57,35 +61,63 @@ const backgroundSettings = computed(() => {
 });
 
 const legendClickHandler = (quadrant) => {
+	chartRef.value.resetSeries();
+
+	if (props.chart_config.map_filter) {
+		mapStore.clearLayerFilter(
+			`${props.map_config[0].index}-${props.map_config[0].type}`
+		);
+	}
+
+	if (lastClickedQuadrant.value === quadrant) {
+		lastClickedQuadrant.value = null;
+		return;
+	}
+
 	switch (quadrant) {
 		case 0:
 			props.series.map(({ data, name }) => {
-				if (data.x < X_AXIS_MID && data.y > Y_AXIS_MID)
+				if (!(data.x < X_AXIS_MID && data.y > Y_AXIS_MID))
 					chartRef.value.toggleSeries(name);
 			});
+			lastClickedQuadrant.value = 0;
 			break;
 		case 1:
 			props.series.map(({ data, name }) => {
-				if (data.x > X_AXIS_MID && data.y > Y_AXIS_MID)
+				if (!(data.x > X_AXIS_MID && data.y > Y_AXIS_MID))
 					chartRef.value.toggleSeries(name);
 			});
+			lastClickedQuadrant.value = 1;
 			break;
 		case 2:
 			props.series.map(({ data, name }) => {
-				if (data.x < X_AXIS_MID && data.y < Y_AXIS_MID)
+				if (!(data.x < X_AXIS_MID && data.y < Y_AXIS_MID))
 					chartRef.value.toggleSeries(name);
 			});
+			lastClickedQuadrant.value = 2;
 			break;
 		case 3:
 			props.series.map(({ data, name }) => {
-				if (data.x > X_AXIS_MID && data.y < Y_AXIS_MID)
+				if (!(data.x > X_AXIS_MID && data.y < Y_AXIS_MID))
 					chartRef.value.toggleSeries(name);
 			});
+			lastClickedQuadrant.value = 3;
 			break;
 
 		default:
+			lastClickedQuadrant.value = null;
 			break;
 	}
+
+	if (!props.chart_config.map_filter) {
+		return;
+	}
+
+	mapStore.addLayerFilter(
+		`${props.map_config[0].index}-${props.map_config[0].type}`,
+		props.chart_config.map_filter[0],
+		props.chart_config.map_filter[1][quadrant]
+	);
 };
 
 const chartOptions = ref({
@@ -334,6 +366,12 @@ const parsedSeries = computed(() => {
 					alignItems: 'center',
 					justifyContent: 'center',
 					marginLeft: '10px',
+					opacity:
+						lastClickedQuadrant === null
+							? 1
+							: lastClickedQuadrant === index
+							? 1
+							: 0.5,
 				}"
 				@click="legendClickHandler(index)"
 			>
