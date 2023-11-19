@@ -4106,24 +4106,7 @@
 		"302": {
 			"id": 302,
 			"index": "child_count",
-			"map_config": [
-				{
-					"title": "共融中心",
-					"index": "_playground",
-					"type": "symbol",
-					"property": [
-						{
-							"key": "name",
-							"name": "名稱"
-						},
-						{
-							"key": "facilities",
-							"name": "設施"
-						}
-					],
-					"icon": "parent_blue"
-				}
-			],
+			"map_config": null,
 			"chart_config": {
 				"color": ["#58B836"],
 				"types": ["ColumnChart", "DistrictChart", "RadarChart"],
@@ -4457,6 +4440,92 @@
 				"zero_color": "#FF0000",
 				"unit": ["m", "個", "平方公里", "平方公里", "平方公里"]
 			},
+			"map_config": [
+				{
+					"type": "symbol",
+					"index": "_parentPoint",
+					"property": [
+						{
+							"key": "name",
+							"name": "名稱"
+						},
+						{
+							"key": "address",
+							"name": "地址"
+						},
+						{
+							"key": "phone",
+							"name": "電話"
+						}
+					],
+					"icon": "parent_0",
+					"title": "親子館"
+				},
+				{
+					"index": "_poc_poly4",
+					"paint": {
+						"fill-color": "#CDF5FD"
+
+					},
+					"property": [
+
+					],
+					"type": "fill",
+					"size": null,
+					"icon": null,
+					"title": "四站公車覆蓋範圍"
+				},
+				{
+					"index": "_poc_poly3",
+					"paint": {
+						"fill-color": "#A0E9FF"
+					},
+					"property": [
+
+					],
+					"type": "fill",
+					"size": null,
+					"icon": null,
+					"title": "三站公車覆蓋範圍"
+
+				},
+				{
+					"index": "_poc_poly2",
+					"paint": {
+						"fill-color": "#89CFF3"
+					},
+					"property": [
+						{
+							"key": "pop_live",
+							"name": "居住推估人數"
+						},
+						{
+							"key": "pop_work",
+							"name": "工作推估人數"
+						}
+					],
+					"type": "fill",
+					"size": null,
+					"icon": null,
+					"title": "二站公車覆蓋範圍"
+
+				},
+				{
+					"index": "_poc_poly1",
+					"paint": {
+						"fill-color": "#00A9FF"
+					},
+					"property": [
+
+					],
+					"type": "fill",
+					"size": null,
+					"icon": null,
+					"title": "一站公車覆蓋範圍"
+				}
+
+
+			],
 			"name": "親子館",
 			"source": "臺北大數據中心",
 			"time_from": "2023-07-28T00:00:00+08:00",
@@ -4892,9 +4961,26 @@
 					{
 						"name": "多但小"
 					}
-				],
-				"map_config": []
+				]
 			},
+			"map_config": [
+				{
+					"title": "共融中心",
+					"index": "_playground",
+					"type": "symbol",
+					"property": [
+						{
+							"key": "name",
+							"name": "名稱"
+						},
+						{
+							"key": "facilities",
+							"name": "設施"
+						}
+					],
+					"icon": "parent_blue"
+				}
+			],
 			"name": "共融遊戲場",
 			"source": "社會局",
 			"history_data": false,
