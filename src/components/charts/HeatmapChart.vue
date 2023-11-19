@@ -13,6 +13,11 @@ const props = defineProps([
 
 const mapStore = useMapStore();
 
+const hasDataValue = computed(() => {
+	if (!props.series) return false;
+	return Object.keys(props.series[0]).includes("data_value");
+});
+
 const heatmapData = computed(() => {
 	let output = {};
 	let highest = 0;
@@ -63,7 +68,7 @@ const colorScale = computed(() => {
 	ranges.unshift({
 		to: 0,
 		from: 0,
-		color: "#444444",
+		color: props.chart_config.zero_color || "#444444",
 	});
 	return ranges;
 });
@@ -80,6 +85,13 @@ const chartOptions = ref({
 		style: {
 			fontSize: "12px",
 			fontWeight: "normal",
+		},
+		formatter: function (val, { seriesIndex, dataPointIndex }) {
+			const value = hasDataValue.value
+				? props.series[seriesIndex].data_value[dataPointIndex]
+				: val;
+
+			return value;
 		},
 	},
 	grid: {
@@ -108,6 +120,13 @@ const chartOptions = ref({
 	},
 	tooltip: {
 		custom: function ({ series, seriesIndex, dataPointIndex, w }) {
+			const unit = Array.isArray(props.chart_config.unit)
+				? props.chart_config.unit[dataPointIndex]
+				: props.chart_config.unit;
+
+			const value = hasDataValue.value
+				? props.series[seriesIndex].data_value[dataPointIndex]
+				: series[seriesIndex][dataPointIndex];
 			// The class "chart-tooltip" could be edited in /assets/styles/chartStyles.css
 			return (
 				'<div class="chart-tooltip">' +
@@ -115,8 +134,8 @@ const chartOptions = ref({
 				`${w.globals.seriesNames[seriesIndex]}-${w.globals.labels[dataPointIndex]}` +
 				"</h6>" +
 				"<span>" +
-				`${series[seriesIndex][dataPointIndex]}` +
-				`${props.chart_config.unit}` +
+				value +
+				unit +
 				"</span>" +
 				"</div>"
 			);
@@ -181,7 +200,10 @@ function handleDataSelection(e, chartContext, config) {
 
 <template>
 	<div v-if="activeChart === 'HeatmapChart'" class="heatmapchart">
-		<div class="heatmapchart-title" v-if="!chart_config.hideTitle">
+		<div
+			class="heatmapchart-title"
+			v-if="!Array.isArray(chart_config.unit)"
+		>
 			<h5>總合</h5>
 			<h6>{{ heatmapData.sum }} {{ chart_config.unit }}</h6>
 		</div>

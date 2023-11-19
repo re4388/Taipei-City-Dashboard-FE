@@ -4446,12 +4446,18 @@
 			"index": "parent_child_center_traffic",
 			"chart_config": {
 				"types": ["HeatmapChart"],
-				"hideTitle": true,
-				"categories": ["MRT", "Park", "Bus", "Bus 2", "Bus 3"],
-				"color": ["#FF1700", "#FF8E00", "#9FE6A0"],
-				"unit": "千次"
+				"categories": [
+					"最近MRT距離",
+					"停車位數",
+					"公車站一站範圍",
+					"公車站兩站範圍",
+					"公車站三站範圍"
+				],
+				"color": ["#008000", "#FFD700", "#FF0000"],
+				"zero_color": "#FF0000",
+				"unit": ["m", "個", "平方公里", "平方公里", "平方公里"]
 			},
-			"name": "YouBike週末群像",
+			"name": "親子館",
 			"source": "臺北大數據中心",
 			"time_from": "2023-07-28T00:00:00+08:00",
 			"time_to": null,
@@ -4858,6 +4864,49 @@
 			"links": [
 				"https://tuic.gov.taipei/youbike",
 				"https://github.com/tpe-doit/YouBike-Optimization"
+			],
+			"tags": [],
+			"contributors": ["tuic"]
+		},
+		"308": {
+			"id": 308,
+			"index": "inclusive_playground",
+			"chart_config": {
+				"types": ["FourQuadrantChart"],
+				"xaxisLabel": "遊戲場數量",
+				"yaxisLabel": "平均設施數量",
+				"xaxisUnit": "個",
+				"yaxisUnit": "個",
+				"backgrounds": [
+					{
+						"name": "少而美",
+						"color": "#f5c489"
+					},
+					{
+						"name": "遊戲天堂"
+					},
+					{
+						"name": "展望未來",
+						"color": "#f75d52"
+					},
+					{
+						"name": "多但小"
+					}
+				],
+				"map_config": []
+			},
+			"name": "共融遊戲場",
+			"source": "社會局",
+			"history_data": false,
+			"time_from": null,
+			"time_to": null,
+			"update_freq": null,
+			"update_freq_unit": null,
+			"short_desc": "// todo 顯示緊急救護的上月統計資訊",
+			"long_desc": "// todo顯示緊急救護的上月統計資訊，資料來源為台北市消防局內部資料，每月更新。",
+			"use_case": "// todo瞭解緊急救護服務案件的統計資訊，有助於優化救護服務的配置及應急措施。",
+			"links": [
+				"https://data.taipei/dataset/detail?id=2704f07d-4d1d-4cef-b53a-c44aef326d96"
 			],
 			"tags": [],
 			"contributors": ["tuic"]
