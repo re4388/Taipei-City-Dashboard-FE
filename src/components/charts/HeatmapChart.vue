@@ -68,7 +68,7 @@ const colorScale = computed(() => {
 	ranges.unshift({
 		to: 0,
 		from: 0,
-		color: "#444444",
+		color: props.chart_config.zero_color || "#444444",
 	});
 	return ranges;
 });
