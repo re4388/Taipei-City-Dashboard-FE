@@ -192,6 +192,8 @@ const drawBg = () => {
 	if (backgroundSettings.value.length === 0) return;
 
 	const ele = chartRef.value.$el.querySelector(".apexcharts-grid");
+	const apexchartsCanvas =
+		chartRef.value.$el.querySelector(".apexcharts-canvas");
 
 	if (ele.querySelector("foreignObject")) return;
 
@@ -224,6 +226,66 @@ const drawBg = () => {
 			box-sizing: border-box; background: ${hexToRgba(color, transparency)}`
 		);
 		foreignObject.appendChild(div);
+	}
+
+	for (const [key, value] of Object.entries(
+		props.chart_config.labels || []
+	)) {
+		const div = document.createElement("div");
+		div.textContent = value;
+
+		switch (key) {
+			case "x1":
+				div.setAttribute(
+					"style",
+					`
+                    position: absolute;
+                    bottom: 0%;
+                    left: 3%;
+                    font-size: 12px;
+                    `
+				);
+				break;
+			case "x2":
+				div.setAttribute(
+					"style",
+					`
+                    position: absolute;
+                    bottom: 0;
+                    left: 50%;
+                    font-size: 12px;
+                    `
+				);
+				break;
+			case "y1":
+				div.setAttribute(
+					"style",
+					`
+                    position: absolute;
+                    bottom: 8%;
+                    left: -1%;
+                    writing-mode:vertical-lr;
+                    font-size: 12px;
+                    `
+				);
+				break;
+			case "y2":
+				div.setAttribute(
+					"style",
+					`
+                    position: absolute;
+                    bottom: 50%;
+                    left: -1%;
+                    writing-mode:vertical-lr;
+                    font-size: 12px;
+                    `
+				);
+				break;
+			default:
+				break;
+		}
+
+		apexchartsCanvas.appendChild(div);
 	}
 
 	ele.append(foreignObject);
