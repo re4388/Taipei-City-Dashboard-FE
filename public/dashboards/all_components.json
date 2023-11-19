@@ -4113,7 +4113,7 @@
 				"unit": "個",
 				"map_filter": ["facilities_cnt_", ["0-2", "3-5", "5up"]]
 			},
-			"name": "行政區：共融遊戲場分布",
+			"name": "共融遊戲場分布",
 			"source": "社會局",
 			"history_data": false,
 			"time_from": "2023-10-11T00:00:00+08:00",
@@ -4221,7 +4221,7 @@
 					}
 				}
 			],
-			"name": "行政區：幼年人口v.s.行車安全",
+			"name": "幼年人口v.s.行車安全",
 			"source": "衛生福利部社會及家庭署",
 			"history_data": false,
 			"time_from": "2021-01-07T00:00:00+08:00",
@@ -4246,7 +4246,7 @@
 				"types": ["RadarChart", "DistrictChart", "ColumnChart"],
 				"unit": "個"
 			},
-			"name": "行政區：A1+A2車禍次數",
+			"name": "車禍次數",
 			"source": "警察局交通大隊",
 			"history_data": true,
 			"time_from": "2021-01-07T00:00:00+08:00",
@@ -4270,7 +4270,7 @@
 				"yMax": 17000,
 				"yMin": -4000
 			},
-			"name": "A1+A2車禍次數v.s.幼年人口數量",
+			"name": "車禍次數v.s.幼年人口數量",
 			"source": "警察局交通大隊&民政局",
 			"time_from": null,
 			"time_to": null,
@@ -4309,8 +4309,8 @@
 					}
 				],
 				"labels": {
-					"x1": "停車位多",
-					"x2": "停車位少",
+					"x1": "停車位少",
+					"x2": "停車位多",
 					"y1": "捷運站遠",
 					"y2": "近捷運站"
 				},
@@ -4571,7 +4571,7 @@
 					"icon": "parent_blue"
 				}
 			],
-			"name": "行政區：共融遊戲場數量v.s.設施數量",
+			"name": "共融遊戲場數量v.s.設施數量",
 			"source": "社會局",
 			"history_data": false,
 			"time_from": "2023-10-11T00:00:00+08:00",
