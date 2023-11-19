@@ -4273,6 +4273,49 @@
 			"links": null,
 			"tags": [],
 			"contributors": ["tuic"]
+		},
+		"308": {
+			"id": 306,
+			"index": "safe_distance",
+			"chart_config": {
+				"types": ["FourQuadrantChart"],
+				"xaxisLabel": "遊戲場數量",
+				"yaxisLabel": "平均設施數量",
+				"xaxisUnit": "個",
+				"yaxisUnit": "個",
+				"backgrounds": [
+					{
+						"name": "少而美",
+						"color": "#f5c489"
+					},
+					{
+						"name": "遊戲天堂"
+					},
+					{
+						"name": "展望未來",
+						"color": "#f75d52"
+					},
+					{
+						"name": "多但小"
+					}
+				],
+				"map_config": []
+			},
+			"name": "共融遊戲場",
+			"source": "社會局",
+			"history_data": false,
+			"time_from": null,
+			"time_to": null,
+			"update_freq": null,
+			"update_freq_unit": null,
+			"short_desc": "// todo 顯示緊急救護的上月統計資訊",
+			"long_desc": "// todo顯示緊急救護的上月統計資訊，資料來源為台北市消防局內部資料，每月更新。",
+			"use_case": "// todo瞭解緊急救護服務案件的統計資訊，有助於優化救護服務的配置及應急措施。",
+			"links": [
+				"https://data.taipei/dataset/detail?id=2704f07d-4d1d-4cef-b53a-c44aef326d96"
+			],
+			"tags": [],
+			"contributors": ["tuic"]
 		}
 	}
 }
