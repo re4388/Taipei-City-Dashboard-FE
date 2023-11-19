@@ -64,9 +64,9 @@ const legendClickHandler = (quadrant) => {
 	chartRef.value.resetSeries();
 
 	if (props.chart_config.map_filter) {
-		mapStore.clearLayerFilter(
-			`${props.map_config[0].index}-${props.map_config[0].type}`
-		);
+		props.map_config.map((item) => {
+			mapStore.clearLayerFilter(`${item.index}-${item.type}`);
+		});
 	}
 
 	if (lastClickedQuadrant.value === quadrant) {
@@ -113,11 +113,13 @@ const legendClickHandler = (quadrant) => {
 		return;
 	}
 
-	mapStore.addLayerFilter(
-		`${props.map_config[0].index}-${props.map_config[0].type}`,
-		props.chart_config.map_filter[0],
-		props.chart_config.map_filter[1][quadrant]
-	);
+	props.map_config.map((item) => {
+		mapStore.addLayerFilter(
+			`${item.index}-${item.type}`,
+			props.chart_config.map_filter[0],
+			props.chart_config.map_filter[1][quadrant]
+		);
+	});
 };
 
 const chartOptions = ref({

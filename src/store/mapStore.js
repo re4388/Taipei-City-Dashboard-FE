@@ -499,94 +499,10 @@ export const useMapStore = defineStore("map", {
 		/* Map Filtering */
 		// Add a filter based on a property on a map layer
 		addLayerFilter(layer_id, property, key, map_config) {
-			console.log("addLayerFilter");
 			const dialogStore = useDialogStore();
 			if (!this.map || dialogStore.dialogs.moreInfo) {
 				return;
 			}
-
-			/**
-			 * 危險程度
-			 */
-			if (
-				// this.map.getSource(`_districtPoly-line-source`) ||
-				this.map.getSource(`_timDanger-fill-source`)
-				// || this.map.getSource(`_parentPoint-symbol-source`)
-			) {
-				console.log("go inside condition");
-				this.map.setFilter("_timDanger-fill", [
-					"==",
-					["get", property],
-					key,
-				]);
-				// this.map.setFilter(
-				// 	"_districtPoly-line",
-				// 	["==", ["get", property], key]
-				// );
-				// this.map.setFilter(
-				// 	"_parentPoint-symbol",
-				// 	["==", ["get", property], key]
-				// );
-
-				return;
-			}
-
-			// 親子館 filter
-			/**
-			 * _nearByParkPoint-circle-source
-			 * _parentCircle-fill-source
-			 * _parentMRT-symbol-source
-			 * _parentPoint-symbol-source
-			 * _parentToMRTLine-line-source
-			 */
-			if (
-				this.map.getSource(`_nearByParkPoint-circle-source`) ||
-				this.map.getSource(`_parentCircle-fill-source`) ||
-				this.map.getSource(`_parentMRT-symbol-source`) ||
-				this.map.getSource(`_parentToMRTLine-line-source`) ||
-				this.map.getSource(`_parentPoint-symbol-source`)
-			) {
-				console.log("go inside condition");
-				this.map.setFilter("_nearByParkPoint-circle", [
-					"==",
-					["get", property],
-					key,
-				]);
-				this.map.setFilter("_parentCircle-fill", [
-					"==",
-					["get", property],
-					key,
-				]);
-				this.map.setFilter("_parentMRT-symbol", [
-					"==",
-					["get", property],
-					key,
-				]);
-				this.map.setFilter("_parentPoint-symbol", [
-					"==",
-					["get", property],
-					key,
-				]);
-				this.map.setFilter("_parentToMRTLine-line", [
-					"==",
-					["get", property],
-					key,
-				]);
-				return;
-			}
-
-			// if (this.map.getSource(`_pocMapFilterLine-line-source`) || this.map.getSource(`_pocMapFilterPoint-circle-source`)) {
-			// 	console.log("go inside condition");
-			// 	this.map.setFilter(
-			// 		"_pocMapFilterLine-line",
-			// 		["==", ["get", property], key]
-			// 	);
-			// 	this.map.setFilter(
-			// 		"_pocMapFilterPoint-circle",
-			// 		["==", ["get", property], key]
-			// 	);
-			// 	return;
-			// }
 
 			if (map_config && map_config.type === "arc") {
 				this.map.removeLayer(layer_id);
@@ -609,16 +525,6 @@ export const useMapStore = defineStore("map", {
 				return;
 			}
 
-			// if (this.map.getSource(`benHu_earthquake-circle-source`) || this.map.getSource(`benHu_earthquake-symbol-source`)){
-			// 	console.log("qq");
-			// 	this.map.setFilter("benHu_earthquake-circle", null);
-			//
-			// 	this.map.setFilter(
-			// 		"benHu_earthquake-symbol",
-			// 		null);
-			// 	return
-			// }
-
 			if (map_config && map_config.type === "arc") {
 				this.map.removeLayer(layer_id);
 				let toRestore = {
@@ -627,14 +533,6 @@ export const useMapStore = defineStore("map", {
 				map_config.layerId = layer_id;
 				this.AddArcMapLayer(map_config, toRestore);
 				return;
-			}
-
-			if (this.map.getSource(`_nearByParkPoint-circle`)) {
-				this.map.setFilter("_nearByParkPoint-circle", null);
-				this.map.setFilter("_parentCircle-fill", null);
-				this.map.setFilter("_parentMRT-symbol", null);
-				this.map.setFilter("_parentToMRTLine-line", null);
-				this.map.setFilter("_parentPoint-symbol", null);
 			}
 
 			this.map.setFilter(layer_id, null);
