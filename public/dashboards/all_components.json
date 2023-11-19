@@ -4258,12 +4258,25 @@
 			"index": "parent_child_center_traffic",
 			"chart_config": {
 				"types": ["HeatmapChart"],
-				"hideTitle": true,
-				"categories": ["MRT", "Park", "Bus", "Bus 2", "Bus 3"],
-				"color": ["#FF1700", "#FF8E00", "#9FE6A0"],
-				"unit": "千次"
+				"categories": [
+					"最近MRT距離",
+					"停車位數",
+					"公車站一站範圍",
+					"公車站兩站範圍",
+					"公車站三站範圍"
+				],
+				"color": [
+					"#FF0000",
+					"#FF8C00",
+					"#FFA500",
+					"#FFD700",
+					"#FFFF00",
+					"#9ACD32",
+					"#008000"
+				],
+				"unit": ["m", "個", "平方公里", "平方公里", "平方公里"]
 			},
-			"name": "YouBike週末群像",
+			"name": "親子館",
 			"source": "臺北大數據中心",
 			"time_from": "2023-07-28T00:00:00+08:00",
 			"time_to": null,
@@ -4275,8 +4288,8 @@
 			"contributors": ["tuic"]
 		},
 		"308": {
-			"id": 306,
-			"index": "safe_distance",
+			"id": 308,
+			"index": "inclusive_playground",
 			"chart_config": {
 				"types": ["FourQuadrantChart"],
 				"xaxisLabel": "遊戲場數量",
